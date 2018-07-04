@@ -1,11 +1,11 @@
 <?php
 
-namespace Newride\Laroak\app\Http\Controllers\Auth;
+namespace Newride\Laroak\bundles\keycloak\Http\Controllers\Auth;
 
-use Newride\Laroak\app\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Newride\Laroak\bundles\keycloak\Http\Controllers\Auth as BaseController;
 
-class ForgotPasswordController extends Controller
+class ForgotPasswordController extends BaseController
 {
     /*
     |--------------------------------------------------------------------------
