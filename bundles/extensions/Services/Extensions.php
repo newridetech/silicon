@@ -18,10 +18,10 @@ class Extensions
 
     public $namespace;
 
-    public function __construct(Application $app, string $namespace = 'Newride\Laroak\extensions\\')
+    public function __construct(Application $app, string $namespace = null)
     {
         $this->app = $app;
-        $this->namespace = $namespace;
+        $this->namespace = config('laroak.extensions.namespace', $namespace ?? 'Newride\Laroak\extensions\\');
     }
 
     public function all(): iterable

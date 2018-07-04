@@ -5,10 +5,13 @@ namespace Newride\Laroak\bundles\keycloak\Http\Controllers\Auth;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Session\Session;
 use Newride\Laroak\bundles\keycloak\Http\Controllers\Auth as BaseController;
+use Newride\Laroak\bundles\keycloak\Contracts\AuthenticationReceiver;
 use pviojo\OAuth2\Client\Provider\Keycloak;
 
 class CheckController extends BaseController
 {
+    public $authenticationReceiver;
+
     public $guard;
 
     public $keycloak;
@@ -18,8 +21,9 @@ class CheckController extends BaseController
     /**
      * Create a new controller instance.
      */
-    public function __construct(Guard $guard, Keycloak $keycloak, Session $session)
+    public function __construct(AuthenticationReceiver $authenticationReceiver, Guard $guard, Keycloak $keycloak, Session $session)
     {
+        $this->authenticationReceiver = $authenticationReceiver;
         $this->guard = $guard;
         $this->keycloak = $keycloak;
         $this->session = $session;
@@ -35,7 +39,7 @@ class CheckController extends BaseController
         $credentials = request()->only('state', 'session_state', 'code');
 
         if (!$this->guard->attempt($credentials)) {
-            return ':(';
+            return $this->getFailedAttemptResponse($this->guard, $credentials);
         }
 
         $url = $this->session->get('url.intended');
@@ -43,6 +47,6 @@ class CheckController extends BaseController
             return redirect($url);
         }
 
-        return redirect()->route('frontend.home');
+        return $this->getIntendedUrlMissingResponse($this->guard, $credentials);
     }
 }
