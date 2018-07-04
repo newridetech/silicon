@@ -1,6 +1,0 @@
-{
-    "require": {
-        "webmozart/glob": "^4.1",
-        "erusev/parsedown": "^1.7"
-    }
-}
