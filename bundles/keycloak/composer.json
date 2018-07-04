@@ -1,0 +1,6 @@
+{
+    "require": {
+        "league/oauth2-client": "^2.3",
+        "pviojo/oauth2-keycloak": "^2.0"
+    }
+}
