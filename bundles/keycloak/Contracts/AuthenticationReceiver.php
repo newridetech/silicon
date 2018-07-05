@@ -3,7 +3,7 @@
 namespace Newride\Laroak\bundles\keycloak\Contracts;
 
 use Illuminate\Contracts\Auth\Guard;
-use use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 interface AuthenticationReceiver
 {

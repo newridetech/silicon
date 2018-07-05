@@ -39,7 +39,10 @@ class CheckController extends BaseController
         $credentials = request()->only('state', 'session_state', 'code');
 
         if (!$this->guard->attempt($credentials)) {
-            return $this->getFailedAttemptResponse($this->guard, $credentials);
+            return $this
+                ->authenticationReceiver
+                ->getFailedAttemptResponse($this->guard, $credentials)
+            ;
         }
 
         $url = $this->session->get('url.intended');
@@ -47,6 +50,9 @@ class CheckController extends BaseController
             return redirect($url);
         }
 
-        return $this->getIntendedUrlMissingResponse($this->guard, $credentials);
+        return $this
+            ->authenticationReceiver
+            ->getIntendedUrlMissingResponse($this->guard, $credentials)
+        ;
     }
 }

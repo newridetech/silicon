@@ -6,6 +6,8 @@ use Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Newride\Laroak\bundles\keycloak\Auth\Guard\KeycloakSession as KeycloakSessionGuard;
 use Newride\Laroak\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
+use Newride\Laroak\bundles\keycloak\Contracts\AuthenticationReceiver as AuthenticationReceiverContract;
+use Newride\Laroak\bundles\keycloak\Services\SimpleAuthenticationReceiver as AuthenticationReceiverImplementation;
 use pviojo\OAuth2\Client\Provider\Keycloak;
 
 class KeycloakProvider extends ServiceProvider
@@ -34,6 +36,11 @@ class KeycloakProvider extends ServiceProvider
         $this->app->singleton(Keycloak::class, function () {
             return new Keycloak(config('keycloak'));
         });
+
+        $this->app->bind(
+            AuthenticationReceiverContract::class,
+            AuthenticationReceiverImplementation::class
+        );
     }
 
     public function registerGates()
