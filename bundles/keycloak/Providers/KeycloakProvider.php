@@ -33,6 +33,8 @@ class KeycloakProvider extends ServiceProvider
 
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/keycloak.php', 'keycloak');
+
         $this->app->singleton(Keycloak::class, function () {
             return new Keycloak(config('keycloak'));
         });
