@@ -41,6 +41,11 @@ class StaticContent extends Model implements StaticContentContract
         return $locale === $this->locale;
     }
 
+    public function set(string $field, string $value): void
+    {
+        $this->data[$field] = $value;
+    }
+
     public function setOwner(StaticContentOwner $staticContentOwner): void
     {
         $this->owner_id = $staticContentOwner->contentOwnerId();

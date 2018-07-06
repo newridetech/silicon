@@ -153,11 +153,7 @@ return [
         /*
          * Bundle Service Providers...
          */
-        Newride\Laroak\bundles\extensions\Providers\ExtensionsServiceProvider::class,
-        Newride\Laroak\bundles\extensions\Providers\ExtensionDirectiveServiceProvider::class,
-        Newride\Laroak\bundles\keycloak\Providers\KeycloakProvider::class,
-        Newride\Laroak\bundles\ssl\Providers\ForceSchemeServiceProvider::class,
-        Newride\Laroak\bundles\content\Providers\ContentServiceProvider::class,
+        Newride\Laroak\bundles\complete\Providers\LaroakServiceProvider::class,
 
         /*
          * Application Service Providers...

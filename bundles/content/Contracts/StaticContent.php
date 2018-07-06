@@ -10,5 +10,7 @@ interface StaticContent
 
     public function isLocale(string $locale): bool;
 
+    public function set(string $field, string $value): void;
+
     public function setOwner(StaticContentOwner $owner): void;
 }
