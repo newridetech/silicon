@@ -9,6 +9,7 @@ class LaroakServiceProvider extends ServiceProvider
     protected static $providers = [
         \Newride\Laroak\bundles\extensions\Providers\ExtensionsServiceProvider::class,
         \Newride\Laroak\bundles\extensions\Providers\ExtensionDirectiveServiceProvider::class,
+        \Newride\Laroak\bundles\extensions\Providers\RouteServiceProvider::class,
         \Newride\Laroak\bundles\keycloak\Providers\KeycloakProvider::class,
         \Newride\Laroak\bundles\ssl\Providers\ForceSchemeServiceProvider::class,
         \Newride\Laroak\bundles\content\Providers\ContentServiceProvider::class,
@@ -16,6 +17,8 @@ class LaroakServiceProvider extends ServiceProvider
 
     public function register(): void
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/laroak.php', 'laroak');
+
         foreach (static::$providers as $provider) {
             $this->app->register($provider);
         }

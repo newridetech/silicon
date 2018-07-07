@@ -162,7 +162,6 @@ return [
         Newride\Laroak\app\Providers\AuthServiceProvider::class,
         // Newride\Laroak\app\Providers\BroadcastServiceProvider::class,
         Newride\Laroak\app\Providers\EventServiceProvider::class,
-        Newride\Laroak\app\Providers\RouteServiceProvider::class,
     ],
 
     /*

@@ -7,15 +7,6 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * This namespace is applied to your controller routes.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
-     */
-    protected $namespace = 'Newride\\change_me';
-
     public function map()
     {
         $this->mapBundlesRoutes();
@@ -34,7 +25,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapExtensionsRoutes(): void
     {
-        foreach ($this->app->make('extensions')->routes('web') as $name => $path) {
+        $extensions = $this->app->make('extensions');
+        $namespace = $extensions->getBaseNamespace();
+
+        foreach ($extensions->routes('web') as $name => $path) {
             Route::as($name.'.')
                 ->middleware([
                     // order is important here, 'web' middleware needs to be
@@ -44,7 +38,7 @@ class RouteServiceProvider extends ServiceProvider
 
                     sprintf('extension:%s', $name),
                 ])
-                ->namespace($this->namespace.'\\extensions\\'.$name.'\Http\Controllers')
+                ->namespace($namespace.$name.'\Http\Controllers')
                 ->group($path)
             ;
         }

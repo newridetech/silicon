@@ -12,16 +12,16 @@ use Webmozart\Glob\Iterator\GlobIterator;
 
 class Extensions
 {
-    public $app;
+    protected $app;
 
-    public $extensions = null;
+    protected $extensions = null;
 
-    public $namespace;
+    protected $namespace;
 
     public function __construct(Application $app, string $namespace = null)
     {
         $this->app = $app;
-        $this->namespace = config('laroak.extensions.namespace', $namespace ?? 'Newride\Laroak\extensions\\');
+        $this->namespace = config('laroak.base_namespace', $namespace).'extensions\\';
     }
 
     public function all(): iterable
@@ -70,6 +70,11 @@ class Extensions
         }
 
         return $this->getExtensions()[$name];
+    }
+
+    public function getBaseNamespace(): string
+    {
+        return $this->namespace;
     }
 
     public function isLoaded(string $name): bool
