@@ -4,7 +4,6 @@ namespace Newride\Laroak\bundles\content\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
 use Illuminate\Database\Eloquent\Model;
-use Newride\Laroak\bundles\content\Contracts\StaticContentOwner;
 use Newride\Laroak\bundles\content\Contracts\StaticContent as StaticContentContract;
 use Newride\Laroak\bundles\content\Exceptions\ContentNotFound;
 
@@ -14,6 +13,12 @@ class StaticContent extends Model implements StaticContentContract
 
     public $casts = [
         'data' => 'array',
+    ];
+
+    public $guarded = [
+        'id',
+        'owner_id',
+        'owner_type',
     ];
 
     public $table = 'laroak_static_contents';
@@ -41,13 +46,17 @@ class StaticContent extends Model implements StaticContentContract
         return $locale === $this->locale;
     }
 
-    public function set(string $field, string $value): void
+    public function owner()
     {
-        $this->data[$field] = $value;
+        return $this->morphTo();
     }
 
-    public function setOwner(StaticContentOwner $staticContentOwner): void
+    public function set(string $field, string $value): StaticContentContract
     {
-        $this->owner_id = $staticContentOwner->contentOwnerId();
+        $this->data = array_merge($this->data, [
+            $field => $value,
+        ]);
+
+        return $this;
     }
 }

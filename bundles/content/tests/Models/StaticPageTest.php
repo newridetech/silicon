@@ -11,7 +11,7 @@ use Newride\Laroak\tests\TestCase;
 
 class StaticPageTest extends TestCase
 {
-    public function cleanUp()
+    public function cleanUp(): void
     {
         $staticPage = DB::table('laroak_static_pages')
             ->where('route', 'test')
@@ -42,7 +42,7 @@ class StaticPageTest extends TestCase
         ;
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -55,40 +55,54 @@ class StaticPageTest extends TestCase
         $this->staticPageId = $staticPage->id;
         $this->assertNotNull($this->staticPageId);
 
-        $content = new StaticContent();
-        $content->setOwner($staticPage);
-        $content->data = [
-            'foo' => 'bar',
-        ];
-        $content->locale = 'pl';
-        $content->saveOrFail();
+        $content = new StaticContent([
+            'data' => [
+                'foo' => 'bar',
+            ],
+            'locale' => 'pl',
+        ]);
 
-        $this->contentId = $content->id;
-        $this->assertNotNull($this->contentId);
+        $staticPage->contents()->save($content);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->cleanUp();
 
         parent::tearDown();
     }
 
-    public function testThatDataIsSerialized()
+    public function testThatNonContentIsSetAndRetrieved(): void
+    {
+        $staticPage = StaticPage::findOrFail($this->staticPageId);
+
+        $expected = 'wooz';
+        $result = $staticPage->content('pl')->set('test.set', $expected)->save();
+
+        $this->assertTrue($result);
+
+        $fresh = $staticPage->fresh();
+
+        $this->assertNotSame($staticPage, $fresh);
+
+        $this->assertSame($expected, $fresh->content('pl')->get('test.set'));
+    }
+
+    public function testThatDataIsSerialized(): void
     {
         $staticPage = StaticPage::findOrFail($this->staticPageId);
 
         $this->assertSame('bar', $staticPage->content('pl')->get('foo'));
     }
 
-    public function testThatNonExistentContentAcceptsFallback()
+    public function testThatNonExistentContentAcceptsFallback(): void
     {
         $staticPage = StaticPage::findOrFail($this->staticPageId);
 
         $this->assertSame('yyy', $staticPage->content('pl')->get('bar', 'yyy'));
     }
 
-    public function testThatNonExistentContentThrowsError()
+    public function testThatNonExistentContentThrowsError(): void
     {
         $staticPage = StaticPage::findOrFail($this->staticPageId);
 
@@ -96,7 +110,7 @@ class StaticPageTest extends TestCase
         $staticPage->content('pl')->get('bar');
     }
 
-    public function testThatNonExistentLocaleThrowsError()
+    public function testThatNonExistentLocaleThrowsError(): void
     {
         $staticPage = StaticPage::findOrFail($this->staticPageId);
 

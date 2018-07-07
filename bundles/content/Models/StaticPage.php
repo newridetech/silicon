@@ -8,23 +8,22 @@ use Newride\Laroak\bundles\content\Exceptions\LocaleNotFound;
 use Alsofronie\Uuid\UuidModelTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Http\Request;
 
 class StaticPage extends Model implements StaticContentOwner
 {
     use UuidModelTrait;
 
+    public $guarded = [
+        'id',
+    ];
+
     public $table = 'laroak_static_pages';
 
     public static function findOneByRequestOrFail(Request $request): self
     {
         return static::request($request)->firstOrFail();
-    }
-
-    public function contentOwnerId(): string
-    {
-        return $this->id;
     }
 
     public function content(string $locale): StaticContentContract
@@ -38,9 +37,9 @@ class StaticPage extends Model implements StaticContentOwner
         throw new LocaleNotFound($locale);
     }
 
-    public function contents(): HasMany
+    public function contents(): MorphMany
     {
-        return $this->hasMany(StaticContent::class, 'owner_id', 'id');
+        return $this->morphMany(StaticContent::class, 'owner');
     }
 
     public function scopeRequest(Builder $query, Request $request): Builder
