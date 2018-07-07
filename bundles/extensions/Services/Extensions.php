@@ -29,13 +29,6 @@ class Extensions
         yield from $this->getExtensions();
     }
 
-    public function boot(): void
-    {
-        foreach ($this->all() as $extension) {
-            $extension->boot();
-        }
-    }
-
     public function canUse(string $name, OAuthUser $user = null): bool
     {
         if (is_null($user)) {
@@ -94,13 +87,6 @@ class Extensions
             $this->extensions[$extensionPath->getExtensionName()] = $this->app->makeWith($extensionClass, [
                 'extensionPath' => $extensionPath,
             ]);
-        }
-    }
-
-    public function register(): void
-    {
-        foreach ($this->all() as $extension) {
-            $extension->register();
         }
     }
 

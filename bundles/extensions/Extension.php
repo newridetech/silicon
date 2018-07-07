@@ -3,22 +3,25 @@
 namespace Newride\Laroak\bundles\extensions;
 
 use Illuminate\Foundation\Application;
+use Illuminate\Support\ServiceProvider;
 use Newride\Laroak\bundles\keycloak\Contracts\OAuthUser;
 
-abstract class Extension
+abstract class Extension extends ServiceProvider
 {
-    protected $app;
-
     protected $extensionPath;
 
     public function __construct(Application $app, ExtensionPath $extensionPath)
     {
-        $this->app = $app;
+        parent::__construct($app);
+
         $this->extensionPath = $extensionPath;
     }
 
     public function boot(): void
     {
+        $this->loadMigrations();
+        $this->loadTranslations();
+        $this->loadViews();
     }
 
     public function canUseAnonymous(): bool
@@ -51,6 +54,47 @@ abstract class Extension
         return $this->app->makeWith(ExtensionReadme::class, [
             'path' => $this->getPath()->basePath('README.md'),
         ]);
+    }
+
+    public function getServiceNamespace(): string
+    {
+        return 'extensions.'.$this->getName();
+    }
+
+    public function getMigrationsDirectory(): string
+    {
+        return $this->extensionPath->basePath('migrations');
+    }
+
+    public function getTranslationsDirectory(): string
+    {
+        return $this->extensionPath->basePath('lang');
+    }
+
+    public function getViewsDirectory(): string
+    {
+        return $this->extensionPath->basePath('views');
+    }
+
+    public function loadMigrations(): void
+    {
+        $this->loadMigrationsFrom($this->getMigrationsDirectory());
+    }
+
+    public function loadTranslations(): void
+    {
+        $this->loadTranslationsFrom(
+            $this->getTranslationsDirectory(),
+            $this->getServiceNamespace()
+        );
+    }
+
+    public function loadViews(): void
+    {
+        $this->loadViewsFrom(
+            $this->getViewsDirectory(),
+            $this->getServiceNamespace()
+        );
     }
 
     public function register(): void

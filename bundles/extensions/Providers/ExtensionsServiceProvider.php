@@ -7,11 +7,6 @@ use Newride\Laroak\bundles\extensions\Services\Extensions;
 
 class ExtensionsServiceProvider extends ServiceProvider
 {
-    public function boot(): void
-    {
-        $this->app->make('extensions')->boot();
-    }
-
     public function register(): void
     {
         $this->app->singleton('extensions', function ($app) {
@@ -20,6 +15,9 @@ class ExtensionsServiceProvider extends ServiceProvider
 
             return $extensions;
         });
-        $this->app->make('extensions')->register();
+
+        foreach ($this->app->make('extensions')->all() as $extension) {
+            $this->app->register($extension);
+        }
     }
 }
