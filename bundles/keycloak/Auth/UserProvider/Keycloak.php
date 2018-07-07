@@ -67,6 +67,14 @@ class Keycloak implements UserProvider
 
     public function validateCredentials(Authenticatable $user, array $credentials): bool
     {
-        return $user->getKeycloakResourceOwner()->toArray()['email_verified'];
+        $resourceOwner = $user->getKeycloakResourceOwner()->toArray();
+
+        if (!array_key_exists('email_verified', $resourceOwner)) {
+            // if that field is not set at all, we can assume that email
+            // validation is disabled
+            return true;
+        }
+
+        return boolval($resourceOwner['email_verified']);
     }
 }
