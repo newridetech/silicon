@@ -55,6 +55,10 @@ class KeycloakProvider extends ServiceProvider
             return $app->make(KeycloakSessionGuard::class);
         });
 
+        Auth::extend('keycloak.token', function ($app, $name, array $config) {
+            return $app->make(KeycloakTokennGuard::class);
+        });
+
         Auth::provider('keycloak', function ($app, array $config) {
             return $app->make(KeycloakUserProvider::class);
         });

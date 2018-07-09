@@ -41,7 +41,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'keycloak.token',
             'provider' => 'users',
         ],
     ],

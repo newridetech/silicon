@@ -24,6 +24,10 @@
         <testsuite name="bundles/extensions">
             <directory suffix="Test.php">./bundles/extensions/tests</directory>
         </testsuite>
+
+        <testsuite name="bundles/keycloak">
+            <directory suffix="Test.php">./bundles/keycloak/tests</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

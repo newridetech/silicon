@@ -4,6 +4,7 @@ namespace Newride\Laroak\bundles\extensions\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Newride\Laroak\bundles\extensions\Services\Extensions;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,27 @@ class RouteServiceProvider extends ServiceProvider
         $extensions = $this->app->make('extensions');
         $namespace = $extensions->getBaseNamespace();
 
+        $this->mapExtensionApiRoutes($extensions, $namespace);
+        $this->mapExtensionWebRoutes($extensions, $namespace);
+    }
+
+    protected function mapExtensionApiRoutes(Extensions $extensions, string $namespace): void
+    {
+        foreach ($extensions->routes('api') as $name => $path) {
+            Route::as($name.'.')
+                ->middleware([
+                    'api',
+
+                    sprintf('extension:%s', $name),
+                ])
+                ->namespace($namespace.$name.'\Http\Endpoints')
+                ->group($path)
+            ;
+        }
+    }
+
+    protected function mapExtensionWebRoutes(Extensions $extensions, string $namespace): void
+    {
         foreach ($extensions->routes('web') as $name => $path) {
             Route::as($name.'.')
                 ->middleware([
