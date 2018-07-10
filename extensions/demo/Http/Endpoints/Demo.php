@@ -8,6 +8,8 @@ class Demo extends Controller
 {
     public function index()
     {
-        return view('extensions.demo::page-demo');
+        return response()->json([
+            'message' => 'Hello, world!',
+        ]);
     }
 }

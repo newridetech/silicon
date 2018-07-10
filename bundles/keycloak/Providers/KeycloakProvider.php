@@ -5,6 +5,7 @@ namespace Newride\Laroak\bundles\keycloak\Providers;
 use Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Newride\Laroak\bundles\keycloak\Auth\Guard\KeycloakSession as KeycloakSessionGuard;
+use Newride\Laroak\bundles\keycloak\Auth\Guard\KeycloakToken as KeycloakTokenGuard;
 use Newride\Laroak\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
 use Newride\Laroak\bundles\keycloak\Contracts\AuthenticationReceiver as AuthenticationReceiverContract;
 use Newride\Laroak\bundles\keycloak\Services\SimpleAuthenticationReceiver as AuthenticationReceiverImplementation;
@@ -56,7 +57,7 @@ class KeycloakProvider extends ServiceProvider
         });
 
         Auth::extend('keycloak.token', function ($app, $name, array $config) {
-            return $app->make(KeycloakTokennGuard::class);
+            return $app->make(KeycloakTokenGuard::class);
         });
 
         Auth::provider('keycloak', function ($app, array $config) {

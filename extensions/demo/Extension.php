@@ -8,6 +8,6 @@ class Extension extends BaseExtension
 {
     public function canUseAnonymous(): bool
     {
-        return true;
+        return false;
     }
 }

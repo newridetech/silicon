@@ -39,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::as($name.'.')
                 ->middleware([
                     'api',
+                    'auth:api',
 
                     sprintf('extension:%s', $name),
                 ])

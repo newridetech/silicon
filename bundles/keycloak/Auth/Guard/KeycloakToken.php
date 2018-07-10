@@ -22,6 +22,26 @@ class KeycloakToken implements Guard
         $this->provider = $provider;
     }
 
+    /**
+     * Determine if the current user is authenticated.
+     *
+     * @return bool
+     */
+    public function check(): bool
+    {
+        return !is_null($this->user());
+    }
+
+    /**
+     * Determine if the current user is a guest.
+     *
+     * @return bool
+     */
+    public function guest(): bool
+    {
+        return !$this->check();
+    }
+
     public function user(): ?Authenticatable
     {
         if ($this->user) {

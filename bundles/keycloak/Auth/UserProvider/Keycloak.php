@@ -42,7 +42,7 @@ class Keycloak implements UserProvider
 
     public function retrieveByAccessToken(AccessToken $accessToken): ?Authenticatable
     {
-        if ($accessToken->hasExpired()) {
+        if (static::hasTokenExpired($accessToken)) {
             try {
                 $accessToken = $this->keycloak->getAccessToken('refresh_token', [
                     'refresh_token' => $accessToken->getRefreshToken(),
@@ -76,5 +76,10 @@ class Keycloak implements UserProvider
         }
 
         return boolval($resourceOwner['email_verified']);
+    }
+
+    protected static function hasTokenExpired(AccessToken $token): bool
+    {
+        return !empty($token->getExpires()) && $token->hasExpired();
     }
 }
