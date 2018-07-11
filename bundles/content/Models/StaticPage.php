@@ -2,14 +2,15 @@
 
 namespace Newride\Laroak\bundles\content\Models;
 
-use Newride\Laroak\bundles\content\Contracts\StaticContent as StaticContentContract;
-use Newride\Laroak\bundles\content\Contracts\StaticContentOwner;
-use Newride\Laroak\bundles\content\Exceptions\LocaleNotFound;
 use Alsofronie\Uuid\UuidModelTrait;
+use App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Http\Request;
+use Newride\Laroak\bundles\content\Contracts\StaticContent as StaticContentContract;
+use Newride\Laroak\bundles\content\Contracts\StaticContentOwner;
+use Newride\Laroak\bundles\content\Exceptions\LocaleNotFound;
 
 class StaticPage extends Model implements StaticContentOwner
 {
@@ -26,8 +27,12 @@ class StaticPage extends Model implements StaticContentOwner
         return static::request($request)->firstOrFail();
     }
 
-    public function content(string $locale): StaticContentContract
+    public function content(string $locale = null): StaticContentContract
     {
+        if (is_null($locale)) {
+            $locale = App::getLocale();
+        }
+
         foreach ($this->contents as $content) {
             if ($content->isLocale($locale)) {
                 return $content;
