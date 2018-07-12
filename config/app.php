@@ -211,7 +211,5 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Scss' => Newride\Scss\Facades\Scss::class,
-
-        'Extensions' => Newride\Silicon\bundles\extensions\Facades\Extensions::class,
     ],
 ];
