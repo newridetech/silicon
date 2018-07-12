@@ -1,9 +1,9 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak;
+namespace Newride\Silicon\bundles\keycloak;
 
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Newride\Laroak\bundles\keycloak\Contracts\OAuthUser;
+use Newride\Silicon\bundles\keycloak\Contracts\OAuthUser;
 use League\OAuth2\Client\Token\AccessToken;
 use pviojo\OAuth2\Client\Provider\KeycloakResourceOwner;
 

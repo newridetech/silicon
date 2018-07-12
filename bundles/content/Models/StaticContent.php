@@ -1,11 +1,11 @@
 <?php
 
-namespace Newride\Laroak\bundles\content\Models;
+namespace Newride\Silicon\bundles\content\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
 use Illuminate\Database\Eloquent\Model;
-use Newride\Laroak\bundles\content\Contracts\StaticContent as StaticContentContract;
-use Newride\Laroak\bundles\content\Exceptions\ContentNotFound;
+use Newride\Silicon\bundles\content\Contracts\StaticContent as StaticContentContract;
+use Newride\Silicon\bundles\content\Exceptions\ContentNotFound;
 
 class StaticContent extends Model implements StaticContentContract
 {
@@ -21,7 +21,7 @@ class StaticContent extends Model implements StaticContentContract
         'owner_type',
     ];
 
-    public $table = 'laroak_static_contents';
+    public $table = 'silicon_static_contents';
 
     public function get(string $field, string $fallback = null): string
     {

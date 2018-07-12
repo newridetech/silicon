@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\content\Models;
+namespace Newride\Silicon\bundles\content\Models;
 
 use Alsofronie\Uuid\UuidModelTrait;
 use App;
@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Http\Request;
-use Newride\Laroak\bundles\content\Contracts\StaticContent as StaticContentContract;
-use Newride\Laroak\bundles\content\Contracts\StaticContentOwner;
-use Newride\Laroak\bundles\content\Exceptions\LocaleNotFound;
+use Newride\Silicon\bundles\content\Contracts\StaticContent as StaticContentContract;
+use Newride\Silicon\bundles\content\Contracts\StaticContentOwner;
+use Newride\Silicon\bundles\content\Exceptions\LocaleNotFound;
 
 class StaticPage extends Model implements StaticContentOwner
 {
@@ -20,7 +20,7 @@ class StaticPage extends Model implements StaticContentOwner
         'id',
     ];
 
-    public $table = 'laroak_static_pages';
+    public $table = 'silicon_static_pages';
 
     public static function findOneByRequestOrFail(Request $request): self
     {

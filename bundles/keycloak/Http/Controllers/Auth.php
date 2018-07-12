@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Http\Controllers;
+namespace Newride\Silicon\bundles\keycloak\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;

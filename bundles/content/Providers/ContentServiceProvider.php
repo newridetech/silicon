@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\content\Providers;
+namespace Newride\Silicon\bundles\content\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

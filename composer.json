@@ -1,6 +1,6 @@
 {
-    "name": "newridetech/laroak",
-    "description": "The Laroak (Laravel + Keycloak) Framework.",
+    "name": "newridetech/silicon",
+    "description": "The Laravel + Keycloak Framework.",
     "keywords": ["framework", "laravel", "keycloak"],
     "license": "MIT",
     "type": "project",
@@ -34,14 +34,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Newride\\Laroak\\app\\": "app/",
-            "Newride\\Laroak\\bundles\\": "bundles/",
-            "Newride\\Laroak\\extensions\\": "extensions/"
+            "Newride\\Silicon\\app\\": "app/",
+            "Newride\\Silicon\\bundles\\": "bundles/",
+            "Newride\\Silicon\\extensions\\": "extensions/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Newride\\Laroak\\tests\\": "tests/"
+            "Newride\\Silicon\\tests\\": "tests/"
         }
     },
     "extra": {

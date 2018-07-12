@@ -1,12 +1,12 @@
 <?php
 
-namespace Newride\Laroak\bundles\extensions\Http\Middleware;
+namespace Newride\Silicon\bundles\extensions\Http\Middleware;
 
 use Auth;
 use Closure;
 use Extensions;
 use Illuminate\Auth\AuthenticationException;
-use Newride\Laroak\bundles\extensions\Exceptions\Unauthorized\CannotUseExtension;
+use Newride\Silicon\bundles\extensions\Exceptions\Unauthorized\CannotUseExtension;
 
 class CheckCanUseExtension
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Providers;
+namespace Newride\Silicon\bundles\keycloak\Providers;
 
 use Auth;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Newride\Laroak\bundles\keycloak\Auth\Guard\KeycloakSession as KeycloakSessionGuard;
-use Newride\Laroak\bundles\keycloak\Auth\Guard\KeycloakToken as KeycloakTokenGuard;
-use Newride\Laroak\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
-use Newride\Laroak\bundles\keycloak\Contracts\AuthenticationReceiver as AuthenticationReceiverContract;
-use Newride\Laroak\bundles\keycloak\Services\SimpleAuthenticationReceiver as AuthenticationReceiverImplementation;
+use Newride\Silicon\bundles\keycloak\Auth\Guard\KeycloakSession as KeycloakSessionGuard;
+use Newride\Silicon\bundles\keycloak\Auth\Guard\KeycloakToken as KeycloakTokenGuard;
+use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
+use Newride\Silicon\bundles\keycloak\Contracts\AuthenticationReceiver as AuthenticationReceiverContract;
+use Newride\Silicon\bundles\keycloak\Services\SimpleAuthenticationReceiver as AuthenticationReceiverImplementation;
 use pviojo\OAuth2\Client\Provider\Keycloak;
 
 class KeycloakProvider extends ServiceProvider
@@ -19,7 +19,7 @@ class KeycloakProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Newride\Laroak\app\Model' => 'Newride\Laroak\app\Policies\ModelPolicy',
+        'Newride\Silicon\app\Model' => 'Newride\Silicon\app\Policies\ModelPolicy',
     ];
 
     /**

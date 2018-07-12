@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\extensions\Providers;
+namespace Newride\Silicon\bundles\extensions\Providers;
 
 use Auth;
 use Extensions;

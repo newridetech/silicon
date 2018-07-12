@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Newride\Laroak\bundles\keycloak\Classes;
+namespace Newride\Silicon\bundles\keycloak\Classes;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;

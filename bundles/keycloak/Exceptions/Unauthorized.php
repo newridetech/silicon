@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Exceptions;
+namespace Newride\Silicon\bundles\keycloak\Exceptions;
 
 use Illuminate\Validation\UnauthorizedException;
 

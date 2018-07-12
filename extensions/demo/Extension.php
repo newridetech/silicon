@@ -1,8 +1,8 @@
 <?php
 
-namespace Newride\Laroak\extensions\demo;
+namespace Newride\Silicon\extensions\demo;
 
-use Newride\Laroak\bundles\extensions\Extension as BaseExtension;
+use Newride\Silicon\bundles\extensions\Extension as BaseExtension;
 
 class Extension extends BaseExtension
 {

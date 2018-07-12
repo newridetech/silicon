@@ -1,10 +1,10 @@
 <?php
 
-namespace Newride\Laroak\bundles\extensions;
+namespace Newride\Silicon\bundles\extensions;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Newride\Laroak\bundles\keycloak\Contracts\OAuthUser;
+use Newride\Silicon\bundles\keycloak\Contracts\OAuthUser;
 
 abstract class Extension extends ServiceProvider
 {

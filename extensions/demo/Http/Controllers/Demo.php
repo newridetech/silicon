@@ -1,8 +1,8 @@
 <?php
 
-namespace Newride\Laroak\extensions\demo\Http\Controllers;
+namespace Newride\Silicon\extensions\demo\Http\Controllers;
 
-use Newride\Laroak\app\Http\Controllers\Controller;
+use Newride\Silicon\app\Http\Controllers\Controller;
 
 class Demo extends Controller
 {

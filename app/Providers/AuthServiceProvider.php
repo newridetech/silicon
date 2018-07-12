@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\app\Providers;
+namespace Newride\Silicon\app\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -12,7 +12,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Newride\Laroak\app\Model' => 'Newride\Laroak\app\Policies\ModelPolicy',
+        'Newride\Silicon\app\Model' => 'Newride\Silicon\app\Policies\ModelPolicy',
     ];
 
     /**

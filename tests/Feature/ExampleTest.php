@@ -1,8 +1,8 @@
 <?php
 
-namespace Newride\Laroak\tests\Feature;
+namespace Newride\Silicon\tests\Feature;
 
-use Newride\Laroak\tests\TestCase;
+use Newride\Silicon\tests\TestCase;
 
 class ExampleTest extends TestCase
 {

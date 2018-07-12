@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Newride\Laroak\bundles\keycloak\Auth\Guard;
+namespace Newride\Silicon\bundles\keycloak\Auth\Guard;
 
-use Newride\Laroak\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
+use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\StatefulGuard;

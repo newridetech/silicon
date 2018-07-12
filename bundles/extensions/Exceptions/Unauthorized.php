@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\extensions\Exceptions;
+namespace Newride\Silicon\bundles\extensions\Exceptions;
 
 use Illuminate\Validation\UnauthorizedException;
 

@@ -153,15 +153,15 @@ return [
         /*
          * Bundle Service Providers...
          */
-        Newride\Laroak\bundles\complete\Providers\LaroakServiceProvider::class,
+        Newride\Silicon\bundles\complete\Providers\SiliconServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
-        Newride\Laroak\app\Providers\AppServiceProvider::class,
-        Newride\Laroak\app\Providers\AuthServiceProvider::class,
-        // Newride\Laroak\app\Providers\BroadcastServiceProvider::class,
-        Newride\Laroak\app\Providers\EventServiceProvider::class,
+        Newride\Silicon\app\Providers\AppServiceProvider::class,
+        Newride\Silicon\app\Providers\AuthServiceProvider::class,
+        // Newride\Silicon\app\Providers\BroadcastServiceProvider::class,
+        Newride\Silicon\app\Providers\EventServiceProvider::class,
     ],
 
     /*
@@ -212,6 +212,6 @@ return [
 
         'Scss' => Newride\Scss\Facades\Scss::class,
 
-        'Extensions' => Newride\Laroak\bundles\extensions\Facades\Extensions::class,
+        'Extensions' => Newride\Silicon\bundles\extensions\Facades\Extensions::class,
     ],
 ];

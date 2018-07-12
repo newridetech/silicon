@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\ssl\Providers;
+namespace Newride\Silicon\bundles\ssl\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use URL;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Http\Controllers\Auth;
+namespace Newride\Silicon\bundles\keycloak\Http\Controllers\Auth;
 
-use Newride\Laroak\bundles\keycloak\Http\Controllers\Auth as BaseController;
+use Newride\Silicon\bundles\keycloak\Http\Controllers\Auth as BaseController;
 
 class RegisterController extends BaseController
 {

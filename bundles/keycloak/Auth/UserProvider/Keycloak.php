@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Newride\Laroak\bundles\keycloak\Auth\UserProvider;
+namespace Newride\Silicon\bundles\keycloak\Auth\UserProvider;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
-use Newride\Laroak\bundles\keycloak\User;
+use Newride\Silicon\bundles\keycloak\User;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakClient;

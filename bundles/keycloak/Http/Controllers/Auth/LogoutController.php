@@ -1,9 +1,9 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Http\Controllers\Auth;
+namespace Newride\Silicon\bundles\keycloak\Http\Controllers\Auth;
 
 use Illuminate\Contracts\Auth\Guard;
-use Newride\Laroak\bundles\keycloak\Http\Controllers\Auth as BaseController;
+use Newride\Silicon\bundles\keycloak\Http\Controllers\Auth as BaseController;
 use pviojo\OAuth2\Client\Provider\Keycloak;
 
 class LogoutController extends BaseController

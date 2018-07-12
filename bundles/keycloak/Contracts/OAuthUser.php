@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Contracts;
+namespace Newride\Silicon\bundles\keycloak\Contracts;
 
 use Illuminate\Contracts\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable;

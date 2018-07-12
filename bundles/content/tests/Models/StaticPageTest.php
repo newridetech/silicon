@@ -1,19 +1,19 @@
 <?php
 
-namespace Newride\Laroak\bundles\content\tests\Models;
+namespace Newride\Silicon\bundles\content\tests\Models;
 
 use DB;
-use Newride\Laroak\bundles\content\Exceptions\ContentNotFound;
-use Newride\Laroak\bundles\content\Exceptions\LocaleNotFound;
-use Newride\Laroak\bundles\content\Models\StaticContent;
-use Newride\Laroak\bundles\content\Models\StaticPage;
-use Newride\Laroak\tests\TestCase;
+use Newride\Silicon\bundles\content\Exceptions\ContentNotFound;
+use Newride\Silicon\bundles\content\Exceptions\LocaleNotFound;
+use Newride\Silicon\bundles\content\Models\StaticContent;
+use Newride\Silicon\bundles\content\Models\StaticPage;
+use Newride\Silicon\tests\TestCase;
 
 class StaticPageTest extends TestCase
 {
     public function cleanUp(): void
     {
-        $staticPage = DB::table('laroak_static_pages')
+        $staticPage = DB::table('silicon_static_pages')
             ->where('route', 'test')
             ->first()
         ;
@@ -22,12 +22,12 @@ class StaticPageTest extends TestCase
             return;
         }
 
-        $content = DB::table('laroak_static_contents')
+        $content = DB::table('silicon_static_contents')
             ->where('owner_id', $staticPage->id)
             ->first()
         ;
 
-        DB::table('laroak_static_pages')
+        DB::table('silicon_static_pages')
             ->where('id', $staticPage->id)
             ->delete()
         ;
@@ -36,7 +36,7 @@ class StaticPageTest extends TestCase
             return;
         }
 
-        DB::table('laroak_static_contents')
+        DB::table('silicon_static_contents')
             ->where('id', $content->id)
             ->delete()
         ;

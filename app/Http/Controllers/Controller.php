@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\app\Http\Controllers;
+namespace Newride\Silicon\app\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

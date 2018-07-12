@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'namespace' => '\Newride\Laroak\bundles\keycloak\Http\Controllers\Auth',
+    'namespace' => '\Newride\Silicon\bundles\keycloak\Http\Controllers\Auth',
 ], function () {
     Route::get('check', 'CheckController@index')->name('check');
     Route::get('login', 'LoginController@index')->name('login');

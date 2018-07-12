@@ -1,10 +1,10 @@
 <?php
 
-namespace Newride\Laroak\bundles\extensions\Services;
+namespace Newride\Silicon\bundles\extensions\Services;
 
-use Newride\Laroak\bundles\extensions\Extension;
-use Newride\Laroak\bundles\extensions\ExtensionPath;
-use Newride\Laroak\bundles\keycloak\Contracts\OAuthUser;
+use Newride\Silicon\bundles\extensions\Extension;
+use Newride\Silicon\bundles\extensions\ExtensionPath;
+use Newride\Silicon\bundles\keycloak\Contracts\OAuthUser;
 use Illuminate\Foundation\Application;
 use LogicException;
 use RuntimeException;
@@ -21,7 +21,7 @@ class Extensions
     public function __construct(Application $app, string $namespace = null)
     {
         $this->app = $app;
-        $this->namespace = config('laroak.base_namespace', $namespace).'extensions\\';
+        $this->namespace = config('silicon.base_namespace', $namespace).'extensions\\';
     }
 
     public function all(): iterable
@@ -45,7 +45,7 @@ class Extensions
 
     /**
      * Having no user set may be a different case than an anonymous usage.
-     * Laroak framework user may be using
+     * Silicon framework user may be using
      * Extensions::canUse($name, Auth::user()) or blade @extension() directive
      * to check if a given user is liable to use an extension. Auth::user()
      * may return null though, so expectations may be different. This function

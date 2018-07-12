@@ -1,8 +1,8 @@
 <?php
 
-namespace Newride\Laroak\keycloak\extensions;
+namespace Newride\Silicon\keycloak\extensions;
 
-use Newride\Laroak\bundles\keycloak\Classes\AuthorizationHeader;
+use Newride\Silicon\bundles\keycloak\Classes\AuthorizationHeader;
 use PHPUnit\Framework\TestCase;
 
 class AuthorizationHeaderTest extends TestCase

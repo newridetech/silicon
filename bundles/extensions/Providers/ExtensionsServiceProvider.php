@@ -1,9 +1,9 @@
 <?php
 
-namespace Newride\Laroak\bundles\extensions\Providers;
+namespace Newride\Silicon\bundles\extensions\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Newride\Laroak\bundles\extensions\Services\Extensions;
+use Newride\Silicon\bundles\extensions\Services\Extensions;
 
 class ExtensionsServiceProvider extends ServiceProvider
 {

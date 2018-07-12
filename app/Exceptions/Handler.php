@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\app\Exceptions;
+namespace Newride\Silicon\app\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

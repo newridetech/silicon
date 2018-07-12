@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\app\Providers;
+namespace Newride\Silicon\app\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Newride\Laroak\app\Events\Event' => [
-            'Newride\Laroak\app\Listeners\EventListener',
+        'Newride\Silicon\app\Events\Event' => [
+            'Newride\Silicon\app\Listeners\EventListener',
         ],
     ];
 

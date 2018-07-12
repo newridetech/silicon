@@ -1,9 +1,9 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Exceptions\Unauthorized;
+namespace Newride\Silicon\bundles\keycloak\Exceptions\Unauthorized;
 
 use Exception;
-use Newride\Laroak\bundles\keycloak\Exceptions\Unauthorized;
+use Newride\Silicon\bundles\keycloak\Exceptions\Unauthorized;
 
 class RoleRequired extends Unauthorized
 {

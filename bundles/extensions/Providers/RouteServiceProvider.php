@@ -1,10 +1,10 @@
 <?php
 
-namespace Newride\Laroak\bundles\extensions\Providers;
+namespace Newride\Silicon\bundles\extensions\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Newride\Laroak\bundles\extensions\Services\Extensions;
+use Newride\Silicon\bundles\extensions\Services\Extensions;
 
 class RouteServiceProvider extends ServiceProvider
 {

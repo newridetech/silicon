@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\content\Contracts;
+namespace Newride\Silicon\bundles\content\Contracts;
 
 interface StaticContentOwner
 {

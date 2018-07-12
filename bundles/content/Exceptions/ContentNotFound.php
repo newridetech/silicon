@@ -1,8 +1,8 @@
 <?php
 
-namespace Newride\Laroak\bundles\content\Exceptions;
+namespace Newride\Silicon\bundles\content\Exceptions;
 
-use Newride\Laroak\bundles\content\Exception;
+use Newride\Silicon\bundles\content\Exception;
 
 class ContentNotFound extends Exception
 {

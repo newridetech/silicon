@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\extensions;
+namespace Newride\Silicon\bundles\extensions;
 
 use Parsedown;
 

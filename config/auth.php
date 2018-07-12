@@ -66,7 +66,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'keycloak',
-            'model' => Newride\Laroak\bundles\keycloak\User::class,
+            'model' => Newride\Silicon\bundles\keycloak\User::class,
         ],
     ],
 

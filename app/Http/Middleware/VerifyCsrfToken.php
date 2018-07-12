@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\app\Http\Middleware;
+namespace Newride\Silicon\app\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as Middleware;
 

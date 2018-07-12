@@ -1,9 +1,9 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Services;
+namespace Newride\Silicon\bundles\keycloak\Services;
 
 use Illuminate\Contracts\Auth\Guard;
-use Newride\Laroak\bundles\keycloak\Contracts\AuthenticationReceiver;
+use Newride\Silicon\bundles\keycloak\Contracts\AuthenticationReceiver;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 

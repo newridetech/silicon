@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\app\Http;
+namespace Newride\Silicon\app\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -16,9 +16,9 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Newride\Laroak\app\Http\Middleware\TrimStrings::class,
+        \Newride\Silicon\app\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Newride\Laroak\app\Http\Middleware\TrustProxies::class,
+        \Newride\Silicon\app\Http\Middleware\TrustProxies::class,
     ];
 
     /**
@@ -28,12 +28,12 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Newride\Laroak\app\Http\Middleware\EncryptCookies::class,
+            \Newride\Silicon\app\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Newride\Laroak\app\Http\Middleware\VerifyCsrfToken::class,
+            \Newride\Silicon\app\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -56,9 +56,9 @@ class Kernel extends HttpKernel
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'extension' => \Newride\Laroak\bundles\extensions\Http\Middleware\CheckCanUseExtension::class,
-        'guest' => \Newride\Laroak\app\Http\Middleware\RedirectIfAuthenticated::class,
-        'keycloak' => \Newride\Laroak\bundles\keycloak\Http\Middleware\CheckKeycloakRole::class,
+        'extension' => \Newride\Silicon\bundles\extensions\Http\Middleware\CheckCanUseExtension::class,
+        'guest' => \Newride\Silicon\app\Http\Middleware\RedirectIfAuthenticated::class,
+        'keycloak' => \Newride\Silicon\bundles\keycloak\Http\Middleware\CheckKeycloakRole::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];

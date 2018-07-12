@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\tests;
+namespace Newride\Silicon\tests;
 
 use Illuminate\Contracts\Console\Kernel;
 

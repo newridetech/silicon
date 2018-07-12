@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\extensions\Facades;
+namespace Newride\Silicon\bundles\extensions\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

@@ -29,7 +29,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => Newride\Laroak\app\User::class,
+        'model' => Newride\Silicon\app\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

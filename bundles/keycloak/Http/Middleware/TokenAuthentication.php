@@ -1,10 +1,10 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Http\Middleware;
+namespace Newride\Silicon\bundles\keycloak\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-use Newride\Laroak\bundles\keycloak\Exceptions\Unauthorized\RoleRequired;
+use Newride\Silicon\bundles\keycloak\Exceptions\Unauthorized\RoleRequired;
 
 class TokenAuthentication
 {

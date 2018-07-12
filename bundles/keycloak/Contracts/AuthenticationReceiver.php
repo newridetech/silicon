@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Contracts;
+namespace Newride\Silicon\bundles\keycloak\Contracts;
 
 use Illuminate\Contracts\Auth\Guard;
 use Symfony\Component\HttpFoundation\Response;

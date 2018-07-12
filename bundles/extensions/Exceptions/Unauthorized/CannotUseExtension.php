@@ -1,9 +1,9 @@
 <?php
 
-namespace Newride\Laroak\bundles\extensions\Exceptions\Unauthorized;
+namespace Newride\Silicon\bundles\extensions\Exceptions\Unauthorized;
 
 use Exception;
-use Newride\Laroak\bundles\extensions\Exceptions\Unauthorized;
+use Newride\Silicon\bundles\extensions\Exceptions\Unauthorized;
 
 class CannotUseExtension extends Unauthorized
 {

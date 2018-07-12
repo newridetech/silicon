@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\bundles\content;
+namespace Newride\Silicon\bundles\content;
 
 use Exception as BaseException;
 

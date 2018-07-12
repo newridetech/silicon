@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\app\Console;
+namespace Newride\Silicon\app\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

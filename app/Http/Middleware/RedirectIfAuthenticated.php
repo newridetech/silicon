@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Laroak\app\Http\Middleware;
+namespace Newride\Silicon\app\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

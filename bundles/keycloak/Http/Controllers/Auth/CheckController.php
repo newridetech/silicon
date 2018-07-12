@@ -1,11 +1,11 @@
 <?php
 
-namespace Newride\Laroak\bundles\keycloak\Http\Controllers\Auth;
+namespace Newride\Silicon\bundles\keycloak\Http\Controllers\Auth;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Session\Session;
-use Newride\Laroak\bundles\keycloak\Http\Controllers\Auth as BaseController;
-use Newride\Laroak\bundles\keycloak\Contracts\AuthenticationReceiver;
+use Newride\Silicon\bundles\keycloak\Http\Controllers\Auth as BaseController;
+use Newride\Silicon\bundles\keycloak\Contracts\AuthenticationReceiver;
 use pviojo\OAuth2\Client\Provider\Keycloak;
 
 class CheckController extends BaseController
