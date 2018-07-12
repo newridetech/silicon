@@ -56,9 +56,7 @@ class Kernel extends HttpKernel
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'extension' => \Newride\Silicon\bundles\extensions\Http\Middleware\CheckCanUseExtension::class,
         'guest' => \Newride\Silicon\app\Http\Middleware\RedirectIfAuthenticated::class,
-        'keycloak' => \Newride\Silicon\bundles\keycloak\Http\Middleware\CheckKeycloakRole::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
