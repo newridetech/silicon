@@ -13,7 +13,7 @@ class StaticPageTest extends TestCase
 {
     public function cleanUp(): void
     {
-        $staticPage = DB::table('silicon_static_pages')
+        $staticPage = DB::table('laroak_static_pages')
             ->where('route', 'test')
             ->first()
         ;
@@ -22,12 +22,12 @@ class StaticPageTest extends TestCase
             return;
         }
 
-        $content = DB::table('silicon_static_contents')
+        $content = DB::table('laroak_static_contents')
             ->where('owner_id', $staticPage->id)
             ->first()
         ;
 
-        DB::table('silicon_static_pages')
+        DB::table('laroak_static_pages')
             ->where('id', $staticPage->id)
             ->delete()
         ;
@@ -36,7 +36,7 @@ class StaticPageTest extends TestCase
             return;
         }
 
-        DB::table('silicon_static_contents')
+        DB::table('laroak_static_contents')
             ->where('id', $content->id)
             ->delete()
         ;

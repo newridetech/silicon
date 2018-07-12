@@ -21,7 +21,7 @@ class StaticContent extends Model implements StaticContentContract
         'owner_type',
     ];
 
-    public $table = 'silicon_static_contents';
+    public $table = 'laroak_static_contents';
 
     public function get(string $field, string $fallback = null): string
     {

@@ -20,7 +20,7 @@ class StaticPage extends Model implements StaticContentOwner
         'id',
     ];
 
-    public $table = 'silicon_static_pages';
+    public $table = 'laroak_static_pages';
 
     public static function findOneByRequestOrFail(Request $request): self
     {
