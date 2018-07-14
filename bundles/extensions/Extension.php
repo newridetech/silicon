@@ -22,6 +22,7 @@ abstract class Extension extends AuthServiceProvider
         $this->loadMigrations();
         $this->loadTranslations();
         $this->loadViews();
+        $this->registerPolicies();
     }
 
     public function canUseAnonymous(): bool
@@ -95,11 +96,6 @@ abstract class Extension extends AuthServiceProvider
             $this->getViewsDirectory(),
             $this->getServiceNamespace()
         );
-    }
-
-    public function policies(): array
-    {
-        return isset($this->policies) ? $this->policies : [];
     }
 
     public function register(): void
