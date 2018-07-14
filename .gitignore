@@ -5,6 +5,7 @@
 /node_modules
 /public/hot
 /public/storage
+/site
 /storage/*.key
 /vendor
 Homestead.json
