@@ -18,7 +18,7 @@ class AuthorizationHeader
             $request = request();
         }
 
-        return new static($request->header('Authorization'));
+        return new static($request->header('Authorization') ?? '');
     }
 
     public function __construct(string $header)
@@ -42,7 +42,7 @@ class AuthorizationHeader
     public function getBearer(): ?string
     {
         if (!$this->hasAccessToken()) {
-            return false;
+            return null;
         }
 
         $chunks = explode(' ', $this->header);

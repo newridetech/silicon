@@ -32,6 +32,11 @@ class KeycloakToken implements Guard
         return !is_null($this->user());
     }
 
+    public function getAuthorizationHeader(): AuthorizationHeader
+    {
+        return AuthorizationHeader::fromRequest();
+    }
+
     /**
      * Determine if the current user is a guest.
      *
@@ -48,7 +53,7 @@ class KeycloakToken implements Guard
             return $this->user;
         }
 
-        $accessToken = AuthorizationHeader::fromRequest()->getAccessToken();
+        $accessToken = $this->getAuthorizationHeader()->getAccessToken();
 
         if (!$accessToken) {
             return null;
@@ -76,7 +81,7 @@ class KeycloakToken implements Guard
 
     public function validate(array $credentials = []): bool
     {
-        return AuthorizationHeader::fromRequest()->hasAccessToken();
+        return $this->getAuthorizationHeader()->hasAccessToken();
     }
 
     public function setUser(Authenticatable $user): self
