@@ -9,7 +9,7 @@ class UpdateLaroakStaticContentsOwner extends Migration
      */
     public function up()
     {
-        DB::statement('UPDATE `laroak_static_contents` SET `owner_type` = replace(owner_type, \'Laroak\', \'Silicon\')');
+        DB::statement('UPDATE laroak_static_contents SET owner_type = replace(owner_type, \'Laroak\', \'Silicon\')');
     }
 
     /**
@@ -17,6 +17,6 @@ class UpdateLaroakStaticContentsOwner extends Migration
      */
     public function down()
     {
-        DB::statement('UPDATE `laroak_static_contents` SET `owner_type` = replace(owner_type, \'Silicon\', \'Laroak\')');
+        DB::statement('UPDATE laroak_static_contents SET owner_type = replace(owner_type, \'Silicon\', \'Laroak\')');
     }
 }
