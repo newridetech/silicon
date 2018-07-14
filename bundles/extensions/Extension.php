@@ -3,10 +3,10 @@
 namespace Newride\Silicon\bundles\extensions;
 
 use Illuminate\Foundation\Application;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
 use Newride\Silicon\bundles\keycloak\Contracts\OAuthUser;
 
-abstract class Extension extends ServiceProvider
+abstract class Extension extends AuthServiceProvider
 {
     protected $extensionPath;
 
@@ -95,6 +95,11 @@ abstract class Extension extends ServiceProvider
             $this->getViewsDirectory(),
             $this->getServiceNamespace()
         );
+    }
+
+    public function policies(): array
+    {
+        return isset($this->policies) ? $this->policies : [];
     }
 
     public function register(): void
