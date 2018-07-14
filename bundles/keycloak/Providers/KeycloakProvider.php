@@ -11,6 +11,7 @@ use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserP
 use Newride\Silicon\bundles\keycloak\Contracts\AuthenticationReceiver as AuthenticationReceiverContract;
 use Newride\Silicon\bundles\keycloak\Http\Middleware\CheckKeycloakRole as CheckKeycloakRoleMiddleware;
 use Newride\Silicon\bundles\keycloak\Services\SimpleAuthenticationReceiver as AuthenticationReceiverImplementation;
+use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
 use pviojo\OAuth2\Client\Provider\Keycloak;
 
 class KeycloakProvider extends ServiceProvider
@@ -39,8 +40,11 @@ class KeycloakProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/keycloak.php', 'keycloak');
 
-        $this->app->singleton(Keycloak::class, function () {
+        $this->app->singleton(Keycloak::class, function (): Keycloak {
             return new Keycloak(config('keycloak'));
+        });
+        $this->app->singleton(AuthenticatedUserContainer::class, function (): AuthenticatedUserContainer {
+            return new AuthenticatedUserContainer();
         });
 
         $this->app->bind(
@@ -63,15 +67,15 @@ class KeycloakProvider extends ServiceProvider
 
     public function registerGuards(): void
     {
-        Auth::extend('keycloak.session', function ($app, $name, array $config) {
+        Auth::extend('keycloak.session', function ($app, $name, array $config): KeycloakSessionGuard {
             return $app->make(KeycloakSessionGuard::class);
         });
 
-        Auth::extend('keycloak.token', function ($app, $name, array $config) {
+        Auth::extend('keycloak.token', function ($app, $name, array $config): KeycloakTokenGuard {
             return $app->make(KeycloakTokenGuard::class);
         });
 
-        Auth::provider('keycloak', function ($app, array $config) {
+        Auth::provider('keycloak', function ($app, array $config): KeycloakUserProvider {
             return $app->make(KeycloakUserProvider::class);
         });
     }

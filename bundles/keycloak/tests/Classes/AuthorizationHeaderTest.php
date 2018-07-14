@@ -1,6 +1,6 @@
 <?php
 
-namespace Newride\Silicon\keycloak\extensions;
+namespace Newride\Silicon\bundles\keycloak\tests\Classes;
 
 use Newride\Silicon\bundles\keycloak\Classes\AuthorizationHeader;
 use PHPUnit\Framework\TestCase;

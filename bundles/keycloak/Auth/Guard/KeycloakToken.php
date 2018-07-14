@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Newride\Silicon\bundles\keycloak\Auth\Guard;
 
+use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
 use Newride\Silicon\bundles\keycloak\Classes\AuthorizationHeader;
 use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -13,13 +14,14 @@ use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakClient;
 class KeycloakToken implements Guard
 {
     protected $keycloak;
-    protected $user;
     protected $provider;
+    protected $userContainer;
 
-    public function __construct(KeycloakClient $keycloak, KeycloakUserProvider $provider)
+    public function __construct(AuthenticatedUserContainer $userContainer, KeycloakClient $keycloak, KeycloakUserProvider $provider)
     {
         $this->keycloak = $keycloak;
         $this->provider = $provider;
+        $this->userContainer = $userContainer;
     }
 
     /**
@@ -49,8 +51,8 @@ class KeycloakToken implements Guard
 
     public function user(): ?Authenticatable
     {
-        if ($this->user) {
-            return $this->user;
+        if ($this->userContainer->hasUser()) {
+            return $this->userContainer->getUser();
         }
 
         $accessToken = $this->getAuthorizationHeader()->getAccessToken();
@@ -67,7 +69,7 @@ class KeycloakToken implements Guard
 
         $this->setUser($user);
 
-        return $this->user;
+        return $this->userContainer->getUser();
     }
 
     public function id(): ?string
@@ -86,7 +88,7 @@ class KeycloakToken implements Guard
 
     public function setUser(Authenticatable $user): self
     {
-        $this->user = $user;
+        $this->userContainer->setUser($user);
 
         return $this;
     }

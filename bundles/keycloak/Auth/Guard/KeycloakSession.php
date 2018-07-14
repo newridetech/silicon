@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Newride\Silicon\bundles\keycloak\Auth\Guard;
 
 use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
+use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\StatefulGuard;
@@ -15,15 +16,16 @@ use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakClient;
 class KeycloakSession implements StatefulGuard
 {
     protected $keycloak;
-    protected $user;
     protected $provider;
     protected $session;
+    protected $userContainer;
 
-    public function __construct(KeycloakClient $keycloak, KeycloakUserProvider $provider, Session $session)
+    public function __construct(AuthenticatedUserContainer $userContainer, KeycloakClient $keycloak, KeycloakUserProvider $provider, Session $session)
     {
         $this->keycloak = $keycloak;
         $this->provider = $provider;
         $this->session = $session;
+        $this->userContainer = $userContainer;
     }
 
     /**
@@ -149,7 +151,7 @@ class KeycloakSession implements StatefulGuard
         $this->session->flush();
 
         // remove user from memory also
-        $this->user = null;
+        $this->userContainer->removeUser();
     }
 
     /**
@@ -195,15 +197,15 @@ class KeycloakSession implements StatefulGuard
      */
     public function setUser(Authenticatable $user): self
     {
-        $this->user = $user;
+        $this->userContainer->setUser($user);
 
         return $this;
     }
 
     public function user(): ?Authenticatable
     {
-        if ($this->user) {
-            return $this->user;
+        if ($this->userContainer->hasUser()) {
+            return $this->userContainer->getUser();
         }
 
         $accessToken = $this->session->get($this->getName());
@@ -221,7 +223,7 @@ class KeycloakSession implements StatefulGuard
 
         $this->setUser($user);
 
-        return $this->user;
+        return $this->userContainer->getUser();
     }
 
     /**
