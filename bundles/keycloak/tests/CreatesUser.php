@@ -9,7 +9,7 @@ use pviojo\OAuth2\Client\Provider\KeycloakResourceOwner;
 
 trait CreatesUser
 {
-    public function createUser(array $roles = [])
+    public function createUser(array $roles = [], string $username = null)
     {
         return new User(
             new KeycloakResourceOwner([
@@ -19,6 +19,7 @@ trait CreatesUser
                     ],
                 ],
                 'sub' => Str::uuid()->toString(),
+                'preferred_username' => $username ?: uniqid(),
             ]),
             new AccessToken([
                 'access_token' => uniqid(),
