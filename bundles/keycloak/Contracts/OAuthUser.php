@@ -11,5 +11,7 @@ interface OAuthUser extends Authenticatable, Authorizable
 
     public function getUpdateProfileUrl(): string;
 
+    public function getUsername(): ?string;
+
     public function hasRole(string $role): bool;
 }

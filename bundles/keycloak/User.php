@@ -92,6 +92,15 @@ class User implements OAuthUser
         return env('KEYCLOAK_AUTH_SERVER_URL').'/realms/master/account';
     }
 
+    public function getUsername(): string
+    {
+        $resourceOwner = $this->keycloakResourceOwner->toArray();
+
+        return $resourceOwner['username']
+            ?? $resourceOwner['preferred_username']
+        ;
+    }
+
     public function hasRole(string $role): bool
     {
         return $this->keycloakResourceOwner->hasRoleForClient(
