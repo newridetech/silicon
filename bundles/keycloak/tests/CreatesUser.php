@@ -9,7 +9,7 @@ use pviojo\OAuth2\Client\Provider\KeycloakResourceOwner;
 
 trait CreatesUser
 {
-    public function createUser(array $roles = [], string $username = null)
+    public function createUser(array $roles = [], string $username = null): User
     {
         return new User(
             new KeycloakResourceOwner([

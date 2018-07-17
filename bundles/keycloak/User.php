@@ -2,6 +2,7 @@
 
 namespace Newride\Silicon\bundles\keycloak;
 
+use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Newride\Silicon\bundles\keycloak\Contracts\OAuthUser;
 use League\OAuth2\Client\Token\AccessToken;
@@ -19,6 +20,11 @@ class User implements OAuthUser
     {
         $this->accessToken = $accessToken;
         $this->keycloakResourceOwner = $keycloakResourceOwner;
+    }
+
+    public function __toString(): string
+    {
+        return $this->toJson();
     }
 
     public function getAccessToken(): AccessToken
@@ -108,6 +114,11 @@ class User implements OAuthUser
         );
     }
 
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
+    }
+
     /**
      * Set the token value for the "remember me" session.
      *
@@ -116,5 +127,24 @@ class User implements OAuthUser
     public function setRememberToken($value): void
     {
         dd(__METHOD__);
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'accessToken' => $this->accessToken->jsonSerialize(),
+            'keycloakResourceOwner' => $this->keycloakResourceOwner->toArray(),
+        ];
+    }
+
+    public function toJson($options = 0): string
+    {
+        $json = json_encode($this->jsonSerialize(), $options);
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw JsonEncodingException::forModel($this, json_last_error_msg());
+        }
+
+        return $json;
     }
 }
