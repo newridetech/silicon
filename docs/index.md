@@ -25,12 +25,20 @@ webapp version it may be a choice worth considering.
 ## Core benefits
 
 * GDPR friendly (and probably other regulations also)
+* when used correctly is simplifies user, roles and identities management by
+offloading everything to [Keycloak](https://www.keycloak.org) and providing
+full integration with [Laravel](https://laravel.com/) helpers and features
+* does not reinvent the wheel, it uses existing technologies and adds minimal
+required code to make them work together and give bigger benefits (we believe
+that `2 + 2 = 5` when combining good solutions)
 
 ## Caveats
 
 * requires senior / upper-mid skills to understand and use Silicon correctly, 
 although with guidance it's possible to introduce junior level programmer to 
 develop features
+* cannot be integrated into an existing Laravel project without refactoring
+(although it can be easily removed and leave modular code behind)
 
 ## How it works
 

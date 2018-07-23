@@ -21,3 +21,52 @@ identity management concepts included by design. It would probably require
 some effort (although it's possible) to include Silicon into an existing 
 project but if you are thinking about creating a fresh codebase or new API / 
 webapp version it may be a choice worth considering.
+
+## Core benefits
+
+* GDPR friendly (and probably other regulations also)
+* when used correctly is simplifies user, roles and identities management by
+offloading everything to [Keycloak](https://www.keycloak.org) and providing
+full integration with [Laravel](https://laravel.com/) helpers and features
+* does not reinvent the wheel, it uses existing technologies and adds minimal
+required code to make them work together and give bigger benefits (we believe
+that `2 + 2 = 5` when combining good solutions)
+
+## Caveats
+
+* requires senior / upper-mid skills to understand and use Silicon correctly, 
+although with guidance it's possible to introduce junior level programmer to 
+develop features
+* cannot be integrated into an existing Laravel project without refactoring
+(although it can be easily removed and leave modular code behind)
+
+## How it works
+
+Silicon provides several built-in services that introduce security oriented
+code bundles into [Laravel](https://laravel.com/). Concept is somewhat similar
+to the [Symfony bundle system](https://symfony.com/doc/3.3/bundles.html). In
+[Symfony](https://symfony.com/) world those are considered a legacy feature 
+(for a good reason), but in Silicon they play different role than just 
+separation of concerns thus they are still relevant and innovative.
+
+Each bundle (or `extensions` - as they are called in Silicon world) besides
+a service provider provide entry point class that extends base
+`Newride\Silicon\bundles\extensions\Extension`. In their essence, bundles are
+automatically registered [Laravel packages](https://laravel.com/docs/5.6/packages)
+with built-in additional Silicon features. Extension is the place to register 
+[Laravel](https://laravel.com/) policies and provide simple entry point to
+check if user has sufficient permissions to use the entire bundle. Users are 
+not stored in the application database, they are retrieved by using 
+[Keycloak's](https://www.keycloak.org) OAuth access token.
+
+Good practice is to assign a different role to each bundle to easily build
+and maintain modular application. For example if your app consist of blog and 
+shop you can have two extensions: `shop` and `blog` and `view-shop`, 
+`view-blog` roles respectively. Extension entry point should make one or two 
+generic checks to cut off access to the extension completely. More specific
+permissions, access control lists etc should be moved to 
+[Laravel's security policies](https://laravel.com/docs/5.6/authorization#creating-policies).
+
+Given such basic code organisation, your application would not store any 
+personal data and be divided into modules with several layers of flexible
+security checks.
