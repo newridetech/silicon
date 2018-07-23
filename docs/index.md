@@ -28,6 +28,10 @@ webapp version it may be a choice worth considering.
 
 ## Caveats
 
+* requires senior / upper-mid skills to understand and use Silicon correctly, 
+although with guidance it's possible to introduce junior level programmer to 
+develop features
+
 ## How it works
 
 Silicon provides several built-in services that introduce security oriented
