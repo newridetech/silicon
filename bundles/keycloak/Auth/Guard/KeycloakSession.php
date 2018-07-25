@@ -207,7 +207,7 @@ class KeycloakSession implements StatefulGuard
      *
      * @return \Illuminate\Contracts\Auth\UserProvider
      */
-    public function getProvider()
+    public function getProvider(): KeycloakUserProvider
     {
         return $this->provider;
     }
