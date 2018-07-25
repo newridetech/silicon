@@ -202,6 +202,16 @@ class KeycloakSession implements StatefulGuard
         return $this;
     }
 
+    /**
+     * Get the user provider used by the guard.
+     *
+     * @return \Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak
+     */
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
     public function user(): ?Authenticatable
     {
         if ($this->userContainer->hasUser()) {
