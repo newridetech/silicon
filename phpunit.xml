@@ -45,5 +45,14 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="MAIL_DRIVER" value="array"/>
+
+        <env name="KEYCLOAK_AUTH_SERVER_URL" value="https://keycloak/auth"/>
+        <env name="KEYCLOAK_CLIENT_ID" value="webapp"/>
+        <env name="KEYCLOAK_CLIENT_SECRET" value="="/>
+        <env name="KEYCLOAK_ENCRYPTION_ALGORITHM" value="RS256"/>
+        <env name="KEYCLOAK_ENCRYPTION_KEY" value="="/>
+        <env name="KEYCLOAK_ENCRYPTION_KEY_PATH" value="key.pem"/>
+        <env name="KEYCLOAK_REALM" value="silicon"/>
+        <env name="KEYCLOAK_REDIRECT_URL" value="https://client/check"/>
     </php>
 </phpunit>

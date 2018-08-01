@@ -205,7 +205,7 @@ class KeycloakSession implements StatefulGuard
     /**
      * Get the user provider used by the guard.
      *
-     * @return \Illuminate\Contracts\Auth\UserProvider
+     * @return \Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak
      */
     public function getProvider(): KeycloakUserProvider
     {

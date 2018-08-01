@@ -26,9 +26,9 @@ class Keycloak implements UserProvider
     }
 
     /**
-     * This function is unlocked for dusk tests and in this case access_token is id. 
+     * This function is unlocked for dusk tests and in this case access_token is id.
      *
-     * @param [type] $identifier
+     * @param mixed $identifier
      * @return Authenticatable|null
      */
     public function retrieveById($identifier): ?Authenticatable
