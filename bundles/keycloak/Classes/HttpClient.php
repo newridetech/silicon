@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use League\OAuth2\Client\Token\AccessToken;
 use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakProvider;
 
-class Keycloak
+class HttpClient
 {
     public function __construct(KeycloakProvider $provider, AuthenticatedUserContainer $authenticatedUserContainer)
     {
