@@ -21,6 +21,13 @@ class HttpClient
         return $this->authenticatedUserContainer->getUser()->getAccessToken();
     }
 
+    public function realm(string $method, $path, array $parameters = [])
+    {
+        $path = '/admin/realms/'.config('keycloak.realm').$path;
+
+        return $this->request($method, $path, $parameters);
+    }
+
     public function request(string $method, string $path, array $parameters = [])
     {
         $request = $this->provider->getAuthenticatedRequest(
