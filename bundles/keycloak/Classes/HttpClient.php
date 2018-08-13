@@ -21,19 +21,20 @@ class HttpClient
         return $this->authenticatedUserContainer->getUser()->getAccessToken();
     }
 
-    public function realm(string $method, $path, array $parameters = [])
+    public function realm(string $method, $path, array $query = [], array $options = [])
     {
         $path = '/admin/realms/'.config('keycloak.realm').$path;
 
-        return $this->request($method, $path, $parameters);
+        return $this->request($method, $path, $query, $options);
     }
 
-    public function request(string $method, string $path, array $parameters = [])
+    public function request(string $method, string $path, array $query = [], array $options = [])
     {
         $request = $this->provider->getAuthenticatedRequest(
             $method,
-            HttpClientUrl::fromPath($path, $parameters)->getUrlWithParameters(),
-            $this->getAccessToken()
+            HttpClientUrl::fromPath($path, $query)->getUrlWithParameters(),
+            $this->getAccessToken(),
+            $options
         );
 
         return $this->provider->getParsedResponse($request);
