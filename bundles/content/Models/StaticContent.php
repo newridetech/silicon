@@ -39,7 +39,7 @@ class StaticContent extends Model implements StaticContentContract
             report($e);
         }
 
-        return (string)$fallback;
+        return (string) $fallback;
     }
 
     public function has(string $field): bool
