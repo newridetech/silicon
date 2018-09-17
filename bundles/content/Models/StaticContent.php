@@ -25,15 +25,21 @@ class StaticContent extends Model implements StaticContentContract
 
     public function get(string $field, string $fallback = null): string
     {
-        if ($this->has($field)) {
-            return $this->data[$field];
+        try {
+
+            if ($this->has($field)) {
+                return (string)$this->data[$field];
+            }
+
+            if (is_null($fallback)) {
+                throw new ContentNotFound($field);
+            }
+
+        } catch (\Exception $e) {
+            report($e);
         }
 
-        if (is_null($fallback)) {
-            throw new ContentNotFound($field);
-        }
-
-        return $fallback;
+        return (string)$fallback;
     }
 
     public function has(string $field): bool
