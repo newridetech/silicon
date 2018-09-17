@@ -10,7 +10,7 @@ class ExtensionPath
 
     public function __construct(string $path)
     {
-        $this->path = str_replace('/',DIRECTORY_SEPARATOR,$path);
+        $this->path = str_replace('/', DIRECTORY_SEPARATOR, $path);
     }
 
     public function basePath(string $filename): string
