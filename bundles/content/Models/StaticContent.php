@@ -51,7 +51,7 @@ class StaticContent extends Model implements StaticContentContract
         return $this->morphTo();
     }
 
-    public function set(string $field, string $value): StaticContentContract
+    public function set(string $field, string $value = ''): StaticContentContract
     {
         $this->data = array_merge($this->data, [
             $field => $value,
