@@ -44,12 +44,6 @@
             "Newride\\Silicon\\tests\\": "tests/"
         }
     },
-    "extra": {
-        "laravel": {
-            "dont-discover": [
-            ]
-        }
-    },
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -70,6 +64,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
+        "laravel": {
+            "dont-discover": [
+            ]
+        },
         "merge-plugin": {
             "include": [
                 "bundles/*/composer.json",

@@ -23,7 +23,7 @@ class StaticContent extends Model implements StaticContentContract
 
     public $table = 'laroak_static_contents';
 
-    public function get(string $field, string $fallback = null): string
+    public function get(string $field, ?string $fallback = ''): string
     {
         if ($this->has($field)) {
             return $this->data[$field];

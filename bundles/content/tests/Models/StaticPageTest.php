@@ -107,7 +107,14 @@ class StaticPageTest extends TestCase
         $staticPage = StaticPage::findOrFail($this->staticPageId);
 
         $this->expectException(ContentNotFound::class);
-        $staticPage->content('pl')->get('bar');
+        $staticPage->content('pl')->get('bar', null);
+    }
+
+    public function testThatNonExistentContentDoesNotThrowError(): void
+    {
+        $staticPage = StaticPage::findOrFail($this->staticPageId);
+
+        $this->assertSame('', $staticPage->content('pl')->get('bar'));
     }
 
     public function testThatNonExistentLocaleThrowsError(): void
