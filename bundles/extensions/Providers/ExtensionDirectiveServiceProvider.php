@@ -2,8 +2,6 @@
 
 namespace Newride\Silicon\bundles\extensions\Providers;
 
-use Auth;
-use Extensions;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
