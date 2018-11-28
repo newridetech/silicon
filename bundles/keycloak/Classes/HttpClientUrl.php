@@ -9,9 +9,8 @@ use League\Uri\Schemes\Http;
 
 class HttpClientUrl
 {
-    protected $parameters;
-
     protected $baseUrl;
+    protected $parameters;
 
     public static function fromPath(string $path, array $parameters = []): self
     {
@@ -31,14 +30,14 @@ class HttpClientUrl
         return $this->getUrlWithParameters();
     }
 
-    public function getParameters(): array
-    {
-        return $this->parameters;
-    }
-
     public function getBaseUrl(): string
     {
         return $this->baseUrl;
+    }
+
+    public function getParameters(): array
+    {
+        return $this->parameters;
     }
 
     public function getUrlWithParameters(): string

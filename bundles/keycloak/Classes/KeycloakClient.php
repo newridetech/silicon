@@ -16,6 +16,13 @@ class KeycloakClient
         $this->client = $client;
     }
 
+    public function addGroupMemberByGroupName(string $name, string $id): void
+    {
+        $group = $this->getGroupByName($name);
+
+        $this->addGroupMembersByGroup($group['id'], $id);
+    }
+
     public function addGroupMembersByGroup(string $groupId, string $userId): void
     {
         $this->client->realm('PUT', '/users/'.$userId.'/groups/'.$groupId, [], [
@@ -29,13 +36,6 @@ class KeycloakClient
                 'userId' => $userId,
             ]),
         ]);
-    }
-
-    public function addGroupMemberByGroupName(string $name, string $id): void
-    {
-        $group = $this->getGroupByName($name);
-
-        $this->addGroupMembersByGroup($group['id'], $id);
     }
 
     public function createUser(array $parameters): array

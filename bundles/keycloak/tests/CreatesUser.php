@@ -3,8 +3,8 @@
 namespace Newride\Silicon\bundles\keycloak\tests;
 
 use Illuminate\Support\Str;
-use Newride\Silicon\bundles\keycloak\User;
 use League\OAuth2\Client\Token\AccessToken;
+use Newride\Silicon\bundles\keycloak\User;
 use pviojo\OAuth2\Client\Provider\KeycloakResourceOwner;
 
 trait CreatesUser

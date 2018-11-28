@@ -4,8 +4,9 @@ namespace Newride\Silicon\bundles\keycloak;
 
 use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Newride\Silicon\bundles\keycloak\Contracts\OAuthUser;
 use League\OAuth2\Client\Token\AccessToken;
+use Newride\Silicon\bundles\keycloak\Contracts\OAuthUser;
+use Newride\Silicon\bundles\keycloak\Exceptions\NotSupported;
 use pviojo\OAuth2\Client\Provider\KeycloakResourceOwner;
 
 class User implements OAuthUser
@@ -80,7 +81,7 @@ class User implements OAuthUser
      */
     public function getRememberToken(): string
     {
-        dd(__METHOD__);
+        throw NotSupported::stateless();
     }
 
     /**
@@ -90,7 +91,7 @@ class User implements OAuthUser
      */
     public function getRememberTokenName(): string
     {
-        dd(__METHOD__);
+        throw NotSupported::stateless();
     }
 
     public function getUpdateProfileUrl(): string
@@ -126,7 +127,7 @@ class User implements OAuthUser
      */
     public function setRememberToken($value): void
     {
-        dd(__METHOD__);
+        throw NotSupported::stateless();
     }
 
     public function toArray(): array

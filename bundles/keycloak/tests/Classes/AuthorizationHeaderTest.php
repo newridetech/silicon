@@ -7,20 +7,20 @@ use PHPUnit\Framework\TestCase;
 
 class AuthorizationHeaderTest extends TestCase
 {
-    public function testThatBearerIsExtracted()
-    {
-        $authHeader = new AuthorizationHeader('Bearer foo');
-
-        $this->assertTrue($authHeader->hasAccessToken());
-        $this->assertSame('foo', $authHeader->getBearer());
-    }
-
     public function testThatAccessTokenIsExtracted()
     {
         $authHeader = new AuthorizationHeader('Bearer foo');
 
         $this->assertTrue($authHeader->hasAccessToken());
         $this->assertSame('foo', $authHeader->getAccessToken()->getToken());
+    }
+
+    public function testThatBearerIsExtracted()
+    {
+        $authHeader = new AuthorizationHeader('Bearer foo');
+
+        $this->assertTrue($authHeader->hasAccessToken());
+        $this->assertSame('foo', $authHeader->getBearer());
     }
 
     public function testThatDeterminesIfAccessTokenIsPresent()

@@ -6,9 +6,9 @@ namespace Newride\Silicon\bundles\keycloak\Auth\UserProvider;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
-use Newride\Silicon\bundles\keycloak\User;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
+use Newride\Silicon\bundles\keycloak\User;
 use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakClient;
 
 class Keycloak implements UserProvider
@@ -23,30 +23,6 @@ class Keycloak implements UserProvider
         return $this->keycloak->getAccessToken('authorization_code', [
             'code' => $code,
         ]);
-    }
-
-    /**
-     * This function is unlocked for dusk tests and in this case access_token is id.
-     *
-     * @param mixed $identifier
-     *
-     * @return Authenticatable|null
-     */
-    public function retrieveById($identifier): ?Authenticatable
-    {
-        $accessToken = $this->getAccessToken($identifier);
-
-        return $this->retrieveByAccessToken($accessToken);
-    }
-
-    public function retrieveByToken($identifier, $token): ?Authenticatable
-    {
-        dd(__METHOD__);
-    }
-
-    public function updateRememberToken(Authenticatable $user, $token): void
-    {
-        dd(__METHOD__);
     }
 
     public function retrieveByAccessToken(AccessToken $accessToken): ?Authenticatable
@@ -72,6 +48,30 @@ class Keycloak implements UserProvider
         $accessToken = $this->getAccessToken($credentials['code']);
 
         return $this->retrieveByAccessToken($accessToken);
+    }
+
+    /**
+     * This function is unlocked for dusk tests and in this case access_token is id.
+     *
+     * @param mixed $identifier
+     *
+     * @return Authenticatable|null
+     */
+    public function retrieveById($identifier): ?Authenticatable
+    {
+        $accessToken = $this->getAccessToken($identifier);
+
+        return $this->retrieveByAccessToken($accessToken);
+    }
+
+    public function retrieveByToken($identifier, $token): ?Authenticatable
+    {
+        dd(__METHOD__);
+    }
+
+    public function updateRememberToken(Authenticatable $user, $token): void
+    {
+        dd(__METHOD__);
     }
 
     public function validateCredentials(Authenticatable $user, array $credentials): bool

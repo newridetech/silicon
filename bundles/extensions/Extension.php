@@ -25,19 +25,24 @@ abstract class Extension extends AuthServiceProvider
         $this->registerPolicies();
     }
 
-    public function canUseAnonymous(): bool
-    {
-        return false;
-    }
-
     public function canUse(OAuthUser $user): bool
     {
         return true;
     }
 
+    public function canUseAnonymous(): bool
+    {
+        return false;
+    }
+
     public function dependencies(): iterable
     {
         return [];
+    }
+
+    public function getMigrationsDirectory(): string
+    {
+        return $this->extensionPath->basePath('migrations');
     }
 
     public function getName(): string
@@ -60,11 +65,6 @@ abstract class Extension extends AuthServiceProvider
     public function getServiceNamespace(): string
     {
         return 'extensions.'.$this->getName();
-    }
-
-    public function getMigrationsDirectory(): string
-    {
-        return $this->extensionPath->basePath('migrations');
     }
 
     public function getTranslationsDirectory(): string

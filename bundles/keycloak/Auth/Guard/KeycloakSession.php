@@ -11,6 +11,7 @@ use Illuminate\Contracts\Session\Session;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
 use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
+use Newride\Silicon\bundles\keycloak\Exceptions\NotSupported;
 use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakClient;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
@@ -67,7 +68,6 @@ class KeycloakSession implements StatefulGuard
      */
     public function authenticate(): Authenticatable
     {
-        // dd(__METHOD__);
         if (!is_null($user = $this->user())) {
             return $user;
         }
@@ -86,6 +86,26 @@ class KeycloakSession implements StatefulGuard
     }
 
     /**
+     * Get a unique identifier for the auth session value.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'login_keycloak';
+    }
+
+    /**
+     * Get the user provider used by the guard.
+     *
+     * @return \Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak
+     */
+    public function getProvider(): KeycloakUserProvider
+    {
+        return $this->provider;
+    }
+
+    /**
      * Determine if the current user is a guest.
      *
      * @return bool
@@ -94,16 +114,6 @@ class KeycloakSession implements StatefulGuard
     {
         return !$this->check();
     }
-
-    /**
-     * Determine if the guard has a user instance.
-     *
-     * @return bool
-     */
-    // public function hasUser(): bool
-    // {
-    //     return !is_null($this->user);
-    // }
 
     /**
      * Get the ID for the currently authenticated user.
@@ -141,7 +151,7 @@ class KeycloakSession implements StatefulGuard
      */
     public function loginUsingId($id, $remember = false)
     {
-        dd(__METHOD__);
+        throw NotSupported::authenticationWithoutCredentials();
     }
 
     /**
@@ -156,16 +166,6 @@ class KeycloakSession implements StatefulGuard
     }
 
     /**
-     * Get a unique identifier for the auth session value.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'login_keycloak';
-    }
-
-    /**
      * Log a user into the application without sessions or cookies.
      *
      * @param array $credentials
@@ -174,7 +174,7 @@ class KeycloakSession implements StatefulGuard
      */
     public function once(array $credentials = [])
     {
-        dd(__METHOD__);
+        throw NotSupported::stateless();
     }
 
     /**
@@ -186,7 +186,7 @@ class KeycloakSession implements StatefulGuard
      */
     public function onceUsingId($id)
     {
-        dd(__METHOD__);
+        throw NotSupported::stateless();
     }
 
     /**
@@ -201,16 +201,6 @@ class KeycloakSession implements StatefulGuard
         $this->userContainer->setUser($user);
 
         return $this;
-    }
-
-    /**
-     * Get the user provider used by the guard.
-     *
-     * @return \Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak
-     */
-    public function getProvider(): KeycloakUserProvider
-    {
-        return $this->provider;
     }
 
     public function user(): ?Authenticatable
@@ -272,6 +262,6 @@ class KeycloakSession implements StatefulGuard
      */
     public function viaRemember()
     {
-        dd(__METHOD__);
+        return false;
     }
 }

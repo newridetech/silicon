@@ -1,11 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateLaroakStaticPagesTable extends Migration
 {
+    /**
+     * Reverse the migrations.
+     */
+    public function down()
+    {
+        Schema::dropIfExists('laroak_static_pages');
+    }
+
     /**
      * Run the migrations.
      */
@@ -16,13 +24,5 @@ class CreateLaroakStaticPagesTable extends Migration
             $table->string('route')->unique();
             $table->timestamps();
         });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down()
-    {
-        Schema::dropIfExists('laroak_static_pages');
     }
 }

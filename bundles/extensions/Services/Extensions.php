@@ -2,11 +2,11 @@
 
 namespace Newride\Silicon\bundles\extensions\Services;
 
+use Illuminate\Foundation\Application;
+use LogicException;
 use Newride\Silicon\bundles\extensions\Extension;
 use Newride\Silicon\bundles\extensions\ExtensionPath;
 use Newride\Silicon\bundles\keycloak\Contracts\OAuthUser;
-use Illuminate\Foundation\Application;
-use LogicException;
 use RuntimeException;
 use Webmozart\Glob\Iterator\GlobIterator;
 

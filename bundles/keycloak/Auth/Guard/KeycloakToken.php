@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Newride\Silicon\bundles\keycloak\Auth\Guard;
 
-use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
-use Newride\Silicon\bundles\keycloak\Classes\AuthorizationHeader;
-use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
+use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
+use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
+use Newride\Silicon\bundles\keycloak\Classes\AuthorizationHeader;
 use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakClient;
 
 class KeycloakToken implements Guard
@@ -49,6 +49,22 @@ class KeycloakToken implements Guard
         return !$this->check();
     }
 
+    public function id(): ?string
+    {
+        if ($this->user()) {
+            return $this->user()->getAuthIdentifier();
+        }
+
+        return null;
+    }
+
+    public function setUser(Authenticatable $user): self
+    {
+        $this->userContainer->setUser($user);
+
+        return $this;
+    }
+
     public function user(): ?Authenticatable
     {
         if ($this->userContainer->hasUser()) {
@@ -72,24 +88,8 @@ class KeycloakToken implements Guard
         return $this->userContainer->getUser();
     }
 
-    public function id(): ?string
-    {
-        if ($this->user()) {
-            return $this->user()->getAuthIdentifier();
-        }
-
-        return null;
-    }
-
     public function validate(array $credentials = []): bool
     {
         return $this->getAuthorizationHeader()->hasAccessToken();
-    }
-
-    public function setUser(Authenticatable $user): self
-    {
-        $this->userContainer->setUser($user);
-
-        return $this;
     }
 }

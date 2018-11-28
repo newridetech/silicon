@@ -2,8 +2,8 @@
 
 namespace Newride\Silicon\bundles\extensions\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 use Newride\Silicon\bundles\extensions\Services\Extensions;
 
 class RouteServiceProvider extends ServiceProvider
@@ -17,20 +17,6 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapBundlesRoutes(): void
     {
         Route::middleware('web')->group(__DIR__.'/../../keycloak/routes/web.php');
-    }
-
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     */
-    protected function mapExtensionsRoutes(): void
-    {
-        $extensions = $this->app->make('extensions');
-        $namespace = $extensions->getBaseNamespace();
-
-        $this->mapExtensionApiRoutes($extensions, $namespace);
-        $this->mapExtensionWebRoutes($extensions, $namespace);
     }
 
     protected function mapExtensionApiRoutes(Extensions $extensions, string $namespace): void
@@ -47,6 +33,20 @@ class RouteServiceProvider extends ServiceProvider
                 ->group($path)
             ;
         }
+    }
+
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     */
+    protected function mapExtensionsRoutes(): void
+    {
+        $extensions = $this->app->make('extensions');
+        $namespace = $extensions->getBaseNamespace();
+
+        $this->mapExtensionApiRoutes($extensions, $namespace);
+        $this->mapExtensionWebRoutes($extensions, $namespace);
     }
 
     protected function mapExtensionWebRoutes(Extensions $extensions, string $namespace): void

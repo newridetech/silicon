@@ -8,10 +8,10 @@ use Newride\Silicon\bundles\extensions\Http\Middleware\CheckCanUseExtension as C
 use Newride\Silicon\bundles\keycloak\Auth\Guard\KeycloakSession as KeycloakSessionGuard;
 use Newride\Silicon\bundles\keycloak\Auth\Guard\KeycloakToken as KeycloakTokenGuard;
 use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
+use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
 use Newride\Silicon\bundles\keycloak\Contracts\AuthenticationReceiver as AuthenticationReceiverContract;
 use Newride\Silicon\bundles\keycloak\Http\Middleware\CheckKeycloakRole as CheckKeycloakRoleMiddleware;
 use Newride\Silicon\bundles\keycloak\Services\SimpleAuthenticationReceiver as AuthenticationReceiverImplementation;
-use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
 use pviojo\OAuth2\Client\Provider\Keycloak;
 
 class KeycloakProvider extends ServiceProvider
@@ -23,14 +23,6 @@ class KeycloakProvider extends ServiceProvider
     {
         $this->bootMiddlewares();
         $this->bootGuards();
-    }
-
-    public function bootMiddlewares(): void
-    {
-        $router = $this->app->make('router');
-
-        $router->aliasMiddleware('extension', CheckCanUseExtensionMiddleware::class);
-        $router->aliasMiddleware('keycloak', CheckKeycloakRoleMiddleware::class);
     }
 
     public function bootGuards(): void
@@ -46,6 +38,14 @@ class KeycloakProvider extends ServiceProvider
         Auth::provider('keycloak', function ($app, array $config): KeycloakUserProvider {
             return $app->make(KeycloakUserProvider::class);
         });
+    }
+
+    public function bootMiddlewares(): void
+    {
+        $router = $this->app->make('router');
+
+        $router->aliasMiddleware('extension', CheckCanUseExtensionMiddleware::class);
+        $router->aliasMiddleware('keycloak', CheckKeycloakRoleMiddleware::class);
     }
 
     public function register()
