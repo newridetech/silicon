@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Newride\Silicon\bundles\keycloak\Auth\Guard;
 
-use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
-use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Contracts\Session\Session;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
+use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
 use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakClient;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class KeycloakSession implements StatefulGuard
 {
@@ -225,7 +226,17 @@ class KeycloakSession implements StatefulGuard
 
         $accessToken = unserialize($accessToken);
 
-        $user = $this->provider->retrieveByAccessToken($accessToken);
+        try {
+            $user = $this->provider->retrieveByAccessToken($accessToken);
+        } catch (IdentityProviderException $e) {
+            if (false !== strpos($e->getMessage(), 'session not found')) {
+                // user has logged out from Keycloak but token is still stored in a
+                // session
+                return null;
+            }
+
+            throw $e;
+        }
 
         if (empty($user)) {
             return null;
