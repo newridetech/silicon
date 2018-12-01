@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Newride\Silicon\bundles\keycloak\Classes;
 
 use Illuminate\Support\Collection;
+use Newride\Silicon\bundles\keycloak\Exceptions\Keycloak\Authorization\Roles as RolesException;
 use Newride\Silicon\bundles\keycloak\Exceptions\Keycloak\GroupNotFound;
 
 class KeycloakClient
@@ -92,14 +93,28 @@ class KeycloakClient
 
     public function getUserByUsername(string $username): ?array
     {
-        return head($this->client->realm('GET', '/users', [
+        return head($this->getUsers([
             'username' => $username,
         ]));
     }
 
+    public function getUsers(array $options = []): array
+    {
+        $response = $this->client->realm('GET', '/users', $options);
+
+        if (!is_array($response)) {
+            throw new RolesException('realm-management', [
+                'query-users',
+                'view-users',
+            ], 'view users list');
+        }
+
+        return $response;
+    }
+
     public function getUsersByEmail(string $email): array
     {
-        return $this->client->realm('GET', '/users', [
+        return $this->getUsers([
             'email' => $email,
         ]);
     }
