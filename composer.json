@@ -16,7 +16,7 @@
         "leafo/scssphp": "^0.7.6",
         "league/oauth2-client": "^2.3",
         "league/uri": "^5.3",
-        "newridetech/laravel-scss": "^1.1",
+        "newridetech/laravel-scss": "^1.2",
         "newridetech/php-classnames": "^1.2",
         "php": "^7.1.3",
         "pviojo/oauth2-keycloak": "^2.0",
