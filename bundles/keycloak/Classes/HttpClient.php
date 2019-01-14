@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Newride\Silicon\bundles\keycloak\Classes;
 
+use App;
 use Illuminate\Http\Request;
 use League\OAuth2\Client\Token\AccessToken;
 use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakProvider;
@@ -18,6 +19,10 @@ class HttpClient
 
     public function getAccessToken(): AccessToken
     {
+        if (App::runningInConsole()) {
+            return $this->provider->getAccessToken('client_credentials');
+        }
+
         return $this->authenticatedUserContainer->getUser()->getAccessToken();
     }
 
