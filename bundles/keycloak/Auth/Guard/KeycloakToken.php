@@ -71,11 +71,13 @@ class KeycloakToken implements Guard
             return $this->userContainer->getUser();
         }
 
-        $accessToken = $this->getAuthorizationHeader()->getAccessToken();
+        $authorizationHeader = $this->getAuthorizationHeader();
 
-        if (!$accessToken) {
+        if (!$authorizationHeader->hasAccessToken()) {
             return null;
         }
+
+        $accessToken = $authorizationHeader->getAccessToken();
 
         $user = $this->provider->retrieveByAccessToken($accessToken);
 

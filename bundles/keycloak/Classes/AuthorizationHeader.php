@@ -7,8 +7,10 @@ namespace Newride\Silicon\bundles\keycloak\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use League\OAuth2\Client\Token\AccessToken;
+use Newride\Silicon\bundles\keycloak\Contracts\AccessTokenHolder;
+use Newride\Silicon\bundles\keycloak\Exceptions\Keycloak\Authorization\BearerTokenNotFound;
 
-class AuthorizationHeader
+class AuthorizationHeader implements AccessTokenHolder
 {
     public $header;
 
@@ -26,12 +28,12 @@ class AuthorizationHeader
         $this->header = $header;
     }
 
-    public function getAccessToken(): ?AccessToken
+    public function getAccessToken(): AccessToken
     {
         $bearer = $this->getBearer();
 
         if (is_null($bearer)) {
-            return null;
+            throw new BearerTokenNotFound($this->header);
         }
 
         return new AccessToken([

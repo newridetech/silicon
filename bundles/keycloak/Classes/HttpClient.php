@@ -4,34 +4,29 @@ declare(strict_types=1);
 
 namespace Newride\Silicon\bundles\keycloak\Classes;
 
-use App;
 use Illuminate\Http\Request;
 use League\OAuth2\Client\Token\AccessToken;
+use Newride\Silicon\bundles\keycloak\Contracts\AccessTokenGranter;
+use Newride\Silicon\bundles\keycloak\Contracts\AccessTokenHolder;
 use Newride\Silicon\bundles\keycloak\Contracts\KeycloakConnectionParametersHolder;
 use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakProvider;
 
-class HttpClient implements KeycloakConnectionParametersHolder
+class HttpClient implements AccessTokenHolder, KeycloakConnectionParametersHolder
 {
-    protected $authenticatedUserContainer;
-
     protected $connection;
 
     protected $provider;
 
-    public function __construct(KeycloakConnectionParameters $connection, KeycloakProvider $provider, AuthenticatedUserContainer $authenticatedUserContainer)
+    public function __construct(KeycloakConnectionParameters $connection, KeycloakProvider $provider, AccessTokenGranter $accessTokenGranter)
     {
-        $this->authenticatedUserContainer = $authenticatedUserContainer;
+        $this->accessTokenGranter = $accessTokenGranter;
         $this->connection = $connection;
         $this->provider = $provider;
     }
 
     public function getAccessToken(): AccessToken
     {
-        if (App::runningInConsole()) {
-            return $this->provider->getAccessToken('client_credentials');
-        }
-
-        return $this->authenticatedUserContainer->getUser()->getAccessToken();
+        return $this->accessTokenGranter->getAccessToken();
     }
 
     public function getKeycloakConnectionParameters(): KeycloakConnectionParameters

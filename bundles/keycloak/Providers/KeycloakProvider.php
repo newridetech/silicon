@@ -9,8 +9,11 @@ use Newride\Silicon\bundles\extensions\Http\Middleware\CheckCanUseExtension as C
 use Newride\Silicon\bundles\keycloak\Auth\Guard\KeycloakSession as KeycloakSessionGuard;
 use Newride\Silicon\bundles\keycloak\Auth\Guard\KeycloakToken as KeycloakTokenGuard;
 use Newride\Silicon\bundles\keycloak\Auth\UserProvider\Keycloak as KeycloakUserProvider;
+use Newride\Silicon\bundles\keycloak\Classes\AccessTokenGranter\AuthorizationCode as AuthorizationCodeGranter;
+use Newride\Silicon\bundles\keycloak\Classes\AccessTokenGranter\ClientCredentials as ClientCredentialsGranter;
 use Newride\Silicon\bundles\keycloak\Classes\AuthenticatedUserContainer;
 use Newride\Silicon\bundles\keycloak\Classes\KeycloakConnectionParameters;
+use Newride\Silicon\bundles\keycloak\Contracts\AccessTokenGranter;
 use Newride\Silicon\bundles\keycloak\Contracts\AuthenticationReceiver as AuthenticationReceiverContract;
 use Newride\Silicon\bundles\keycloak\Http\Middleware\CheckKeycloakRole as CheckKeycloakRoleMiddleware;
 use Newride\Silicon\bundles\keycloak\Services\SimpleAuthenticationReceiver as AuthenticationReceiverImplementation;
@@ -54,6 +57,13 @@ class KeycloakProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/keycloak.php', 'keycloak');
 
+        $this->app->singleton(AccessTokenGranter::class, function (Application $app): AccessTokenGranter {
+            if ($app->runningInConsole()) {
+                return $app->make(ClientCredentialsGranter::class);
+            }
+
+            return $app->make(AuthorizationCodeGranter::class);
+        });
         $this->app->singleton(KeycloakConnectionParameters::class, function (): KeycloakConnectionParameters {
             return KeycloakConnectionParameters::fromArray(config('keycloak'));
         });

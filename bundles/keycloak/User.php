@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use League\OAuth2\Client\Token\AccessToken;
 use Newride\Silicon\bundles\keycloak\Classes\KeycloakConnectionParameters;
+use Newride\Silicon\bundles\keycloak\Contracts\AccessTokenHolder;
 use Newride\Silicon\bundles\keycloak\Contracts\OAuthUser;
 use Newride\Silicon\bundles\keycloak\Exceptions\NotSupported;
 use pviojo\OAuth2\Client\Provider\KeycloakResourceOwner;
 
-class User implements OAuthUser
+class User implements AccessTokenHolder, OAuthUser
 {
     use Authorizable;
 
