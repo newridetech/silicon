@@ -33,7 +33,7 @@ class KeycloakClient
             ],
             'body' => json_encode([
                 'groupId' => $groupId,
-                'realm' => config('keycloak.realm'),
+                'realm' => $this->client->getRealm(),
                 'userId' => $userId,
             ]),
         ]);

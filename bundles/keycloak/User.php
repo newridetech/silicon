@@ -5,6 +5,7 @@ namespace Newride\Silicon\bundles\keycloak;
 use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use League\OAuth2\Client\Token\AccessToken;
+use Newride\Silicon\bundles\keycloak\Classes\KeycloakConnectionParameters;
 use Newride\Silicon\bundles\keycloak\Contracts\OAuthUser;
 use Newride\Silicon\bundles\keycloak\Exceptions\NotSupported;
 use pviojo\OAuth2\Client\Provider\KeycloakResourceOwner;
@@ -15,11 +16,14 @@ class User implements OAuthUser
 
     public $accessToken;
 
+    public $connection;
+
     public $keycloakResourceOwner;
 
-    public function __construct(KeycloakResourceOwner $keycloakResourceOwner, AccessToken $accessToken)
+    public function __construct(KeycloakConnectionParameters $connection, KeycloakResourceOwner $keycloakResourceOwner, AccessToken $accessToken)
     {
         $this->accessToken = $accessToken;
+        $this->connection = $connection;
         $this->keycloakResourceOwner = $keycloakResourceOwner;
     }
 
@@ -62,6 +66,11 @@ class User implements OAuthUser
     {
         // nope
         return '';
+    }
+
+    public function getKeycloakConnectionParameters(): KeycloakConnectionParameters
+    {
+        return $this->connection;
     }
 
     public function getKeycloakResourceOwner(): KeycloakResourceOwner
@@ -111,7 +120,8 @@ class User implements OAuthUser
     public function hasRole(string $role): bool
     {
         return $this->keycloakResourceOwner->hasRoleForClient(
-            config('keycloak.clientId'), $role
+            $this->connection->getClientId(),
+            $role
         );
     }
 

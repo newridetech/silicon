@@ -3,8 +3,8 @@
 namespace Newride\Silicon\bundles\ssl\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use URL;
 use function League\Uri\parse;
+use URL;
 
 class ForceSchemeServiceProvider extends ServiceProvider
 {

@@ -1659,6 +1659,11 @@
         {
             "name": "league/uri",
             "version": "5.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/uri.git",
+                "reference": "f2bceb755f1108758cf4cf925e4cd7699ce686aa"
+            },
             "require": {
                 "ext-fileinfo": "*",
                 "ext-intl": "*",

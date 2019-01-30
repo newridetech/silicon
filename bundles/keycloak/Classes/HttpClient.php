@@ -7,13 +7,21 @@ namespace Newride\Silicon\bundles\keycloak\Classes;
 use App;
 use Illuminate\Http\Request;
 use League\OAuth2\Client\Token\AccessToken;
+use Newride\Silicon\bundles\keycloak\Contracts\KeycloakConnectionParametersHolder;
 use pviojo\OAuth2\Client\Provider\Keycloak as KeycloakProvider;
 
-class HttpClient
+class HttpClient implements KeycloakConnectionParametersHolder
 {
-    public function __construct(KeycloakProvider $provider, AuthenticatedUserContainer $authenticatedUserContainer)
+    protected $authenticatedUserContainer;
+
+    protected $connection;
+
+    protected $provider;
+
+    public function __construct(KeycloakConnectionParameters $connection, KeycloakProvider $provider, AuthenticatedUserContainer $authenticatedUserContainer)
     {
         $this->authenticatedUserContainer = $authenticatedUserContainer;
+        $this->connection = $connection;
         $this->provider = $provider;
     }
 
@@ -26,9 +34,15 @@ class HttpClient
         return $this->authenticatedUserContainer->getUser()->getAccessToken();
     }
 
+    public function getKeycloakConnectionParameters(): KeycloakConnectionParameters
+    {
+        return $this->connection;
+    }
+
     public function realm(string $method, $path, array $query = [], array $options = [])
     {
-        $path = '/admin/realms/'.config('keycloak.realm').$path;
+        $realm = $this->getKeycloakConnectionParameters()->getRealm();
+        $path = '/admin/realms/'.$realm.$path;
 
         return $this->request($method, $path, $query, $options);
     }
@@ -37,7 +51,7 @@ class HttpClient
     {
         $request = $this->provider->getAuthenticatedRequest(
             $method,
-            HttpClientUrl::fromPath($path, $query)->getUrlWithParameters(),
+            HttpClientUrl::fromPath($this->connection, $path, $query)->getUrlWithParameters(),
             $this->getAccessToken(),
             $options
         );

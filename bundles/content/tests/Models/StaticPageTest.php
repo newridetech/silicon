@@ -3,6 +3,7 @@
 namespace Newride\Silicon\bundles\content\tests\Models;
 
 use DB;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Newride\Silicon\bundles\content\Exceptions\ContentNotFound;
 use Newride\Silicon\bundles\content\Exceptions\LocaleNotFound;
 use Newride\Silicon\bundles\content\Models\StaticContent;
@@ -11,6 +12,8 @@ use Newride\Silicon\tests\TestCase;
 
 class StaticPageTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function setUp(): void
     {
         parent::setUp();

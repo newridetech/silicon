@@ -12,9 +12,9 @@ class HttpClientUrl
     protected $baseUrl;
     protected $parameters;
 
-    public static function fromPath(string $path, array $parameters = []): self
+    public static function fromPath(KeycloakConnectionParameters $connection, string $path, array $parameters = []): self
     {
-        $baseUrl = config('keycloak.authServerUrl').'/'.trim($path, '/');
+        $baseUrl = $connection->getAuthServerUrl().'/'.trim($path, '/');
 
         return new static($baseUrl, $parameters);
     }
